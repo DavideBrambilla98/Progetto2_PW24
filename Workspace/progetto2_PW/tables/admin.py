@@ -3,10 +3,9 @@ from django.contrib import admin
 from .models import PatologiaTable
 
 class TableAdmin(admin.ModelAdmin):
-    list_display = ['__str__','codice', 'nome','criticita','cronica','mortale']
+    list_display = ['__str__']
     list_filter = ['nome','codice']
     search_fields = ['nome','codice']
-    prepopulated_fields = {'slug':('titolo',)}
 
     class Meta:
         model = PatologiaTable
