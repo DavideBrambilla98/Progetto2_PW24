@@ -12,6 +12,5 @@ urlpatterns = [
     # è una scorciatoia per non passare da views.py
     path('', ListView.as_view(
         queryset = PatologiaTable.objects.all().order_by("nome"),
-        template_name="Ricoveri.html"), name='lista'),
+        template_name="Patologie.html"), name='lista'),
 ]
-
