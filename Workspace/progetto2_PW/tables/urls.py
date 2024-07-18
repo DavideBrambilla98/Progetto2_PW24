@@ -9,7 +9,7 @@ from .models import PatologiaTable
 # tabelle singole
 urlpatterns = [
     path('',ListView.as_view(
-        queryset = PatologiaTable.objects.all().order_by("-codice"),
+        queryset = PatologiaTable.objects.all().order_by("nome"),
         template_name="ListaTabelle.html"),name='lista'),
     path('tabella-singola/', table_views.tabellaSingola, name='singola'),
 ]
