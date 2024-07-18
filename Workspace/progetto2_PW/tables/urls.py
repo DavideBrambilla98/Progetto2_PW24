@@ -9,6 +9,7 @@ from .models import PatologiaTable
 # tabelle singole
 urlpatterns = [
     # passa i valori contenuti nel DB alla pagina html in forma di lista
+    # è una scorciatoia per non passare da views.py
     path('', ListView.as_view(
         queryset = PatologiaTable.objects.all().order_by("nome"),
         template_name="Ricoveri.html"), name='lista'),
