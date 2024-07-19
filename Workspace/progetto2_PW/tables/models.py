@@ -15,7 +15,7 @@ class RicoveroTable(models.Model):
     codiceOspedale = models.CharField(max_length=10)
     codiceRicovero = models.CharField(max_length=20)
     paziente = models.CharField(max_length=20)
-    data = models.DateTimeField()
+    data = models.DateField()
     durata = models.IntegerField()
     motivo = models.CharField(max_length=50)
     costo = models.IntegerField()
