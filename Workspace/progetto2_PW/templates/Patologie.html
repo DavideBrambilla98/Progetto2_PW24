@@ -10,9 +10,9 @@
     <option value="1">Nome patologia</option>
     <option value="2">Criticità</option>
     <option value="3">Cronica</option>
-    <option value="3">Mortale</option>
-    <option value="3">Cronica e mortale</option>
-    <option value="3">Nè cronica nè mortale</option>
+    <option value="4">Mortale</option>
+    <option value="5">Cronica e mortale</option>
+    <option value="6">Nè cronica nè mortale</option>
 {% endblock search_option %}
 
 {% block content %}
@@ -31,16 +31,16 @@
                     <td>{{ object.nome }}</td>
                     <td>{{ object.criticita }}</td>
                     {% if object.cronica == "1" and object.mortale != "1" %}
-                    <td>Cronica</td>
+                        <td>Cronica</td>
                     {% endif %}
                     {% if object.cronica == "1" and object.mortale == "1" %}
-                    <td>Cronica e mortale</td>
+                        <td>Cronica e mortale</td>
                     {% endif %}
                     {% if object.cronica != "1" and object.mortale == "1" %}
-                    <td>Mortale</td>
+                        <td>Mortale</td>
                     {% endif %}
                     {% if object.cronica != "1" and object.mortale != "1" %}
-                    <td>Non cronica e non mortale</td>
+                        <td>Non cronica e non mortale</td>
                     {% endif %}
                 </tr>
                 {% empty %}
