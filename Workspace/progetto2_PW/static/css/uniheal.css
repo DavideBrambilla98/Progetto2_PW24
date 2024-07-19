@@ -105,7 +105,7 @@ footer {
     background: rgba(255, 179, 71, 1);
     font-size: 24px;
     color: #fff;
-    height: 2em;
+    height: fit-content;
 }
 
 .copSection i {
