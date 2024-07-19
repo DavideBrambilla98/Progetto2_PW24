@@ -1,8 +1,7 @@
 from django.contrib import admin
-# Register your models here.
-from .models import PatologiaTable
+from .models import PatologiaTable, RicoveroTable
 
-class TableAdmin(admin.ModelAdmin):
+class PatologiaTableAdmin(admin.ModelAdmin):
     list_display = ['__str__']
     list_filter = ['nome','codice']
     search_fields = ['nome','codice']
@@ -10,4 +9,13 @@ class TableAdmin(admin.ModelAdmin):
     class Meta:
         model = PatologiaTable
 
-admin.site.register(PatologiaTable, TableAdmin)
+class RicoveroTableAdmin(admin.ModelAdmin):
+    list_display = ['codiceRicovero']
+    list_filter = ['codiceRicovero']
+    search_fields = ['codiceRicovero']
+
+    class Meta:
+        model = RicoveroTable
+
+admin.site.register(PatologiaTable, PatologiaTableAdmin)
+admin.site.register(RicoveroTable, RicoveroTableAdmin)

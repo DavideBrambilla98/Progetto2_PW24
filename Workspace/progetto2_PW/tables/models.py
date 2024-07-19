@@ -10,3 +10,14 @@ class PatologiaTable(models.Model):
 
     def __str__(self):
         return self.nome # serve per nominare le tabelle nel DB
+
+class RicoveroTable(models.Model):
+    codiceOspedale = models.CharField(max_length=10)
+    codiceRicovero = models.CharField(max_length=20)
+    paziente = models.CharField(max_length=20)
+    data = models.DateField()
+    durata = models.IntegerField()
+    motivo = models.CharField(max_length=50)
+    costo = models.IntegerField()
+    def __str__(self):
+        return self.codiceRicovero # serve per nominare le tabelle nel DB
