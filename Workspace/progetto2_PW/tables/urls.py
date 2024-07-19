@@ -13,4 +13,5 @@ urlpatterns = [
     path('', ListView.as_view(
         queryset = PatologiaTable.objects.all().order_by("nome"),
         template_name="Patologie.html"), name='listaPat'),
+
 ]

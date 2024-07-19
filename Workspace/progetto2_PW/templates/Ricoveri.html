@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Ricoveri 
+    {% endblock head_title %}
+</title>
+
+{% block search_option %}
+    <option value="1">Paziente</option>
+    <option value="2">CSSN</option>
+    <option value="3">Nome ospedale</option>
+    <option value="4">Patologia</option>
+    <option value="5">Data</option>
+{% endblock search_option %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Paziente</th>
+                    <th>Ospedale</th>
+                    <th>Ricovero</th>
+                    <th>Motivo</th>
+                    <th>Data</th>
+                    <th>Durata</th>
+                    <th>Costo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.paziente }}</td>
+                    <td>{{ object.codiceOspedale }}</td>
+                    <td>{{ object.codiceRicovero }}</td>
+                    <td>{{ object.data }}</td>
+                    <td>{{ object.durata }}</td>
+                    <td>{{ object.motivo }}</td>
+                    <td>{{ object.costo }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nessun record trovato</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
