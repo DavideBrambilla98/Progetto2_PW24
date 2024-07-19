@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+
+    <head>
+        {% load static %}
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title> {% block head_title %} UniHeal {% endblock head_title %} </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/uniheal.css' %}">
+    </head>
+    
+    <body>
+        <header>
+            <a href="index.php"><img src="{% static '/img/logoProgWeb2_t.png' %}"></a>
+        </header>
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a id="homeNav" class="nav-link active" aria-current="page" href="/"><div class="nameNav"><i class="fa-solid fa-bed-pulse"></i> Ricovero</div></a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="homeNav" class="nav-link active" aria-current="page" href="/"><div class="nameNav"><i class="fa-solid fa-hospital"></i> Ospedale</div></a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="homeNav" class="nav-link active" aria-current="page" href="/"><div class="nameNav"><i class="fa-solid fa-user"></i> Cittadino</div></a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="homeNav" class="nav-link active" aria-current="page" href="/"><div class="nameNav"><i class="fa-solid fa-virus"></i> Patologia</div></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container">
+          <div >
+            <div class="col-md-7 float-left">
+              <form>
+                <div class="form-row align-items-center">
+                  <div class="col-auto my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                      {% block search_option %}
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      {% endblock search_option %}
+                    </select>
+                  </div>
+                  <div class="col-auto my-1">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                      <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                      <label class="custom-control-label" for="customControlAutosizing">Remember</label>
+                    </div>
+                  </div>
+                  <div class="search_bar">
+                    <input id="cerca" name="cerca" type="text" placeholder="cerca" />
+                  </div>
+                  <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary"><i id="pulsRicerca" class="fa-solid fa-magnifying-glass"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+                            
+        {% block content %}
+            
+        {% endblock content %}
+        
+        <footer>
+            <div class="gitSection">
+                <a href="https://github.com/DavideBrambilla98/Progetto2_PW24" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+            <div class="copSection">Copyright <i class="fa-regular fa-copyright"></i>
+            </div>
+            <div class="disclaimer">Disclaimer 
+                <a href="Disclaimer.php"><i class="fa-solid fa-receipt"></i></a>
+            </div>
+        </footer>
+    
+        <!-- importo la CDN di bootstrap e di jquery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="{% static 'js/gestioneAzioni.js' %}"></script> 
+    </body>
+</html>

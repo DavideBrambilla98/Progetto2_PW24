@@ -1,50 +1,48 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Ricoveri</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Ricoveri 
+    {% endblock head_title %}
+</title>
 
-<header>
-    
-    <a href="index.php"><img src="{% static '/logoProgWeb2_t.png' %}"></a>
-</header>
+{% block search_option %}
+    <option selected>Choose...</option>
+    <option value="1">Nome patologia</option>
+    <option value="2">Criticità</option>
+    <option value="3">Cronica</option>
+    <option value="3">Mortale</option>
+    <option value="3">Cronica e mortale</option>
+    <option value="3">Nè cronica nè mortale</option>
+{% endblock search_option %}
 
-<body>
-<nav>
-    <ul id="sidemenu">
-        <li><a id="homeNav" href="index.php"><i class="fa-solid fa-bed-pulse"></i>Ricovero</a></li>
-        <li><a id="ospNav" href="ospedale.php"><i class="fa-solid fa-hospital"></i>Ospedale</a></li>
-        <li><a id="persNav" href="cittadino.php"><i class="fa-solid fa-user"></i>Cittadino</a></li>
-        <li><a id="patoNav" href="patologia.php"><i class="fa-solid fa-virus"></i>Patologia</a></li>
-    </ul>
-</nav>
-
+{% block content %}
     <div class="container">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Codice</th>
                     <th>Nome</th>
                     <th>Criticità</th>
-                    <th>Cronica</th>
-                    <th>Mortale</th>
+                    <th>Tipo</th>
                 </tr>
             </thead>
             <tbody>
                 {% for object in object_list %}
                 <tr>
-                    <td>{{ object.codice }}</td>
                     <td>{{ object.nome }}</td>
                     <td>{{ object.criticita }}</td>
-                    <td>{{ object.cronica }}</td>
-                    <td>{{ object.mortale }}</td>
+                    {% if object.cronica == "1" and object.mortale != "1" %}
+                    <td>Cronica</td>
+                    {% endif %}
+                    {% if object.cronica == "1" and object.mortale == "1" %}
+                    <td>Cronica e mortale</td>
+                    {% endif %}
+                    {% if object.cronica != "1" and object.mortale == "1" %}
+                    <td>Mortale</td>
+                    {% endif %}
+                    {% if object.cronica != "1" and object.mortale != "1" %}
+                    <td>Non cronica e non mortale</td>
+                    {% endif %}
                 </tr>
                 {% empty %}
                 <tr>
@@ -54,17 +52,4 @@
             </tbody>
         </table>
     </div>
-</body>
-
-<footer>
-    <div class="gitSection">
-        <a href="https://github.com/DavideBrambilla98/Progetto2_PW24" target="_blank">
-            <i class="fa-brands fa-github"></i>
-        </a>
-    </div>
-    <div class="copSection">Copyright <i class="fa-regular fa-copyright"></i></div>
-    <div class="disclaimer">Disclaimer 
-        <a href="Disclaimer.php"><i class="fa-solid fa-receipt"></i></a></div>
-</footer>
-
-</html>
+{% endblock content %}

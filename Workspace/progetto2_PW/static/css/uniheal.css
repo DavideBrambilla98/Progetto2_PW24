@@ -1,0 +1,81 @@
+header {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    width: 100%;
+    background-position: center;
+    color: #fff;
+    background-color: #FFB347;
+    font-size: 40px;
+    padding-top: 0.2%;
+    padding-left: 30px;
+}
+
+/* Stile della navigazione*/
+/*=================================================================================================*/
+.nameNav {
+    color: #a3a2a2;
+    margin-left: 4px;
+    display: inline-block;
+}
+
+.nameNav:hover {
+    color: #ff004f;
+}
+
+/* Stile della barra di ricerca*/
+/*=================================================================================================*/
+.form-row {
+    background: #FFB347;
+    border-radius: 20px; /* Angoli arrotondati */
+    padding: 2px;
+    align-items: center;
+    margin-top: 2.5%;; /* Aggiungi spazio sotto la form */
+    margin-bottom: 2.5%;; /* Aggiungi spazio sotto la form */
+}
+
+/* Stile del menu a tendina */
+/* Stile del menu a tendina */
+.custom-select {
+    border: none;
+    border-radius: 20px;
+    padding: .375rem 1.75rem .375rem .75rem;
+    margin-right: 10px; /* Aggiungi spazio a destra del select */
+    background-color: transparent;
+    color: #0047AB;
+}
+
+/* Stile del checkbox */
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff; /* Testo bianco */
+    background-color: #007bff; /* Sfondo blu */
+}
+
+/* Stile della barra di ricerca */
+.search_bar input[type="text"] {
+    border: none;
+    padding: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 100%;
+    border-radius: 20px; /* Angoli arrotondati */
+    height: 2.3em;
+}
+
+/* Stile del pulsante di invio */
+.btn-primary {
+    border: none;
+    border-radius: 10px; /* Angoli arrotondati */
+    margin-left: 15px;
+    color: #fff;
+    background: transparent;
+    box-shadow: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.btn-primary:hover {
+    color: #4A9DEC;
+    background: transparent;
+}
