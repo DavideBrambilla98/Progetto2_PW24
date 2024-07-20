@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import PatologiaTable, RicoveroTable
+from .models import PatologiaTable, RicoveroTable, OspedaleTable
+
 
 class PatologiaTableAdmin(admin.ModelAdmin):
     list_display = ['__str__']
@@ -17,5 +18,14 @@ class RicoveroTableAdmin(admin.ModelAdmin):
     class Meta:
         model = RicoveroTable
 
+class OspedaleTableAdmin(admin.ModelAdmin):
+    list_display = ['codiceStruttura']
+    list_filter = ['codiceStruttura']
+    search_fields = ['codiceStruttura']
+
+    class Meta:
+        model = OspedaleTable
+
 admin.site.register(PatologiaTable, PatologiaTableAdmin)
 admin.site.register(RicoveroTable, RicoveroTableAdmin)
+admin.site.register(OspedaleTable, OspedaleTableAdmin)

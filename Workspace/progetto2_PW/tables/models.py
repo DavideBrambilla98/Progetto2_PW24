@@ -21,3 +21,13 @@ class RicoveroTable(models.Model):
     costo = models.IntegerField()
     def __str__(self):
         return self.codiceRicovero # serve per nominare le tabelle nel DB
+
+class OspedaleTable(models.Model):
+    codiceStruttura = models.CharField(max_length=10)
+    denominazioneStruttura = models.CharField(max_length=50)
+    indirizzo = models.CharField(max_length=50)
+    comune = models.CharField(max_length=50)
+    descrizioneTipoStruttura = models.CharField(max_length=50)
+    direttoreSanitario = models.CharField(max_length=20)
+    def __str__(self):
+        return self.codiceStruttura # serve per nominare le tabelle nel DB
