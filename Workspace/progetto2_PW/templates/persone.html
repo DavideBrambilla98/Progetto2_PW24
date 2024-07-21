@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Persone
+    {% endblock head_title %}
+</title>
+
+{% block search_option %}
+    <option value="1">Codice Fiscale</option>
+    <option value="2">Data Nascita</option>
+    <option value="3">Nome </option>
+    <option value="4">Cognome</option>
+    <option value="5">Indirizzo</option>
+{% endblock search_option %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cognome</th>
+                    <th>Nome</th>
+                    <th>Luogo Nascita</th>
+                    <th>Regione Nascita</th>
+                    <th>Provincia Nascita</th>
+                    <th>CAP Nascita</th>
+                    <th>Data Nascita</th>
+                    <th>Codice Fiscale</th>
+                    <th>Luogo Residenza</th>
+                    <th>Ospedale</th>
+                    <th>Regione Residenza</th>
+                    <th>Provincia Residenza</th>
+                    <th>Cap Residenza</th>
+                    <th>Indirizzo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.cognome }}</td>
+                    <td>{{ object.nome }}</td>
+                    <td>{{ object.nasLuogo }}</td>
+                    <td>{{ object.nasRegione }}</td>
+                    <td>{{ object.nasProv }}</td>
+                    <td>{{ object.nasCap }} </td>
+                    <td>{{ object.dataNascita }} </td>
+                    <td>{{ object.codFiscale }} </td>
+                    <td>{{ object.resLuogo }} </td>
+                    <td>{{ object.resRegione }} </td>
+                    <td>{{ object.resProv }} </td>
+                    <td>{{ object.resCap }} </td>
+                    <td>{{ object.indirizzo }} </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nessun record trovato</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

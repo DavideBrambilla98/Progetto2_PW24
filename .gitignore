@@ -111,3 +111,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/Progetto2_PW24.iml
+.idea/vcs.xml
+Workspace/progetto2_PW/progetto2_PW/__pycache__/__init__.cpython-312.pyc
