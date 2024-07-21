@@ -10,8 +10,7 @@ class PatologiaTable(models.Model):
 
     def __str__(self):
         return self.nome # serve per nominare le tabelle nel DB
-<<<<<<< Updated upstream
-=======
+
 
 class RicoveroTable(models.Model):
     codiceOspedale = models.CharField(max_length=10)
@@ -52,4 +51,3 @@ class PersoneTable(models.Model):
         indirizzo = models.CharField(max_length=60)
         def __str__(self):
             return self.codFiscale  # serve per nominare le tabelle nel DB
->>>>>>> Stashed changes

@@ -1,11 +1,8 @@
 #Classe che serve a importare i valori del DB in excel all'interno del DB sqlite
 import pandas as pd
-<<<<<<< Updated upstream
 from .models import PatologiaTable
-=======
 from .models import PatologiaTable, OspedaleTable, PersoneTable
 from .models import RicoveroTable
->>>>>>> Stashed changes
 from django.db import transaction
 
 try:
@@ -33,8 +30,7 @@ def importa_dati_da_excel():
             )
             # Salva l'oggetto nel database
             patologia.save()
-<<<<<<< Updated upstream
-=======
+
     # Leggi il file excel
     df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Ricoveri')
 
@@ -107,4 +103,3 @@ df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Persone')
             )
             # Salva l'oggetto nel database
             persona.save()
->>>>>>> Stashed changes
