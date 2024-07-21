@@ -1,4 +1,5 @@
-// Script per mantenere evidenziata la NAV in funzione della pagina attiva -------------------------------------------------
+//=====================================================================================================================
+// Script per mantenere evidenziata la NAV in funzione della pagina attiva
 
 // Estrai il nome della pagina dal URL (aggiunto +1 altrimenti restituirebbe anche / dell'URL)
 var pagina = window.location.pathname;
@@ -41,3 +42,5 @@ switch (true) {
         pulsanteOspedale.style.color = "#a3a2a2";
         pulsanteVirus.style.color = "#a3a2a2";
 }
+
+//=====================================================================================================================
