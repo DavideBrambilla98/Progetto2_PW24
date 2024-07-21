@@ -19,9 +19,9 @@ class RicoveroTableAdmin(admin.ModelAdmin):
         model = RicoveroTable
 
 class OspedaleTableAdmin(admin.ModelAdmin):
-    list_display = ['codiceStruttura']
-    list_filter = ['codiceStruttura']
-    search_fields = ['codiceStruttura']
+    list_display = ['denominazioneStruttura']
+    list_filter = ['denominazioneStruttura']
+    search_fields = ['denominazioneStruttura']
 
     class Meta:
         model = OspedaleTable

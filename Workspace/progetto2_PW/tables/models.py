@@ -30,4 +30,4 @@ class OspedaleTable(models.Model):
     descrizioneTipoStruttura = models.CharField(max_length=50)
     direttoreSanitario = models.CharField(max_length=20)
     def __str__(self):
-        return self.codiceStruttura # serve per nominare le tabelle nel DB
+        return self.denominazioneStruttura # serve per nominare le tabelle nel DB
