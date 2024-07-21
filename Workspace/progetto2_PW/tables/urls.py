@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views as table_views
 from django.views.generic import ListView,DetailView
-from .models import PatologiaTable
+from .models import PatologiaTable, OspedaleTable
 from .models import RicoveroTable
 
 # listview mostra il contenuto del DB sotto forma di lista
@@ -17,4 +17,8 @@ urlpatterns = [
     path('', ListView.as_view(
         queryset=RicoveroTable.objects.all().order_by("paziente"),
         template_name="Ricoveri.html"), name='listaRic'),
+
+    path('ospedale/', ListView.as_view(
+        queryset=OspedaleTable.objects.all().order_by("denominazioneStruttura"),
+        template_name="Ospedali.html"), name='listaOsp'),
 ]
