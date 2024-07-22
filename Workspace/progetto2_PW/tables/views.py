@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
 from .models import PatologiaTable
-# Create your views here.
-
+from django.db.models import Q
 from .models import PatologiaTable, RicoveroTable
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import RicoveroTableForm
+
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
@@ -32,6 +32,7 @@ def searchPatologie(request):
 
     return render(request, 'Patologie.html', {'queryset': queryset})
 
+
 class RicoveroTableCreate(CreateView):
     model = RicoveroTable
     form_class = RicoveroTableForm
@@ -43,6 +44,7 @@ class RicoveroTableUpdate(UpdateView):
     form_class = RicoveroTableForm
     template_name = 'crud.html'
     success_url = reverse_lazy('listaPers')
+
 
 class RicoveroTableDelete(DeleteView):
     model = RicoveroTable
