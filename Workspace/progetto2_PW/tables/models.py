@@ -50,3 +50,10 @@ class PersoneTable(models.Model):
         indirizzo = models.CharField(max_length=60)
         def __str__(self):
             return self.codFiscale  # serve per nominare le tabelle nel DB
+
+class PatologiaRicoveroTable(models.Model):
+    codOspedale = models.CharField(max_length=20)
+    codRicovero = models.CharField(max_length=20)
+    codPatologia = models.CharField(max_length=20)
+    def __str__(self):
+        return self.codRicovero  # serve per nominare le tabelle nel DB
