@@ -25,7 +25,7 @@ urlpatterns = [
         queryset=OspedaleTable.objects.all().order_by("denominazioneStruttura"),
         template_name="Ospedali.html"), name='listaOsp'),
 
-    path('persone/', ListView.as_view(
+    path('cittadino/', ListView.as_view(
         queryset=PersoneTable.objects.all().order_by("codFiscale"),
-        template_name="Persone.html"), name='listaPers'),
+        template_name="cittadini.html"), name='listaPers'),
 ]
