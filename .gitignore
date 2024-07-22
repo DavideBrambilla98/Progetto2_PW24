@@ -5,6 +5,10 @@ __pycache__/
 .pyc
 .pyo
 .pyd
+admin.cpython-312.pyc
+.cpython-312.pyc
+admin.cpython-312
+**/*.pyc
 
 # C extensions
 *.so
@@ -85,15 +89,6 @@ celerybeat-schedule
 # SageMath parsed files
 *.sage.py
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -111,3 +106,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/Progetto2_PW24.iml
+.idea/vcs.xml

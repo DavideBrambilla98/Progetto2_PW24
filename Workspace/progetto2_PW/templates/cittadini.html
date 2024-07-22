@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Cittadini
+    {% endblock head_title %}
+</title>
+
+{% block search_option %}
+    <option value="1">Cittadino</option>
+    <option value="2">CSSN</option>
+    <option value="3">Data di nascita</option>
+    <option value="4">Luogo di nascita</option>
+    <option value="5">Indirizzo</option>
+{% endblock search_option %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cittadino</th>
+                    <th>CSSN</th>
+                    <th>Data Nascita</th>
+                    <th>Luogo Nascita</th>
+                    <th>Indirizzo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.cognome }} {{ object.nome }}</td>
+                    <td>{{ object.codFiscale }} </td>
+                    <td>{{ object.dataNascita }} </td>
+                    <td>{{ object.nasLuogo }}</td>
+                    <td>{{ object.indirizzo }} </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nessun record trovato</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
