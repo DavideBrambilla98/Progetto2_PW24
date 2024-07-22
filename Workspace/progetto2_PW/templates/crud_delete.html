@@ -1,0 +1,7 @@
+<h1>Conferma Cancellazione</h1>
+<p>Sei sicuro di voler cancellare "{{ object }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Conferma</button>
+</form>
+<a href="{% url 'mio_modello_list' %}">Annulla</a>

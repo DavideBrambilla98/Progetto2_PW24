@@ -1,6 +1,12 @@
 from django.shortcuts import render
+
 from .models import PatologiaTable
 from django.db.models import Q
+from .models import PatologiaTable, RicoveroTable
+from django.db.models import Q
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import RicoveroTableForm
 
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -26,3 +32,21 @@ def searchPatologie(request):
 
     return render(request, 'Patologie.html', {'queryset': queryset})
 
+
+class RicoveroTableCreate(CreateView):
+    model = RicoveroTable
+    form_class = RicoveroTableForm
+    template_name = 'crud.html'
+    success_url = reverse_lazy('listaPers')
+
+class RicoveroTableUpdate(UpdateView):
+    model = RicoveroTable
+    form_class = RicoveroTableForm
+    template_name = 'crud.html'
+    success_url = reverse_lazy('listaPers')
+
+
+class RicoveroTableDelete(DeleteView):
+    model = RicoveroTable
+    template_name = 'crud_delete.html'
+    success_url = reverse_lazy('listaPers')

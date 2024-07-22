@@ -6,6 +6,7 @@ from .models import PatologiaTable, OspedaleTable
 from .models import RicoveroTable
 from .views import searchPatologie
 from .models import PersoneTable
+from .views import RicoveroTableCreate, RicoveroTableDelete, RicoveroTableUpdate
 
 
 # listview mostra il contenuto del DB sotto forma di lista
@@ -27,4 +28,8 @@ urlpatterns = [
     path('cittadino/', ListView.as_view(
         queryset=PersoneTable.objects.all().order_by("codFiscale"),
         template_name="cittadini.html"), name='listaPers'),
+
+    path('create/', RicoveroTableCreate.as_view(), name='create'),
+    path('update/<int:pk>', RicoveroTableUpdate.as_view(), name='update'),
+    path('delete/<int:pk>', RicoveroTableDelete.as_view(), name='delete'),
 ]
