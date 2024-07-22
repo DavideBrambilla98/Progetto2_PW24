@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 # Create your models here.
@@ -13,13 +15,17 @@ class PatologiaTable(models.Model):
 
 class RicoveroTable(models.Model):
     codiceOspedale = models.CharField(max_length=10)
-    codiceRicovero = models.CharField(max_length=20)
+    codiceRicovero = models.CharField(max_length=20, unique=True, editable=False)
     paziente = models.CharField(max_length=20)
     data = models.DateField()
     durata = models.IntegerField()
     motivo = models.CharField(max_length=50)
     costo = models.IntegerField()
-    
+
+    def save(self, *args, **kwargs):
+        if not self.codiceRicovero:
+            self.codiceRicovero = f'RIC-{uuid.uuid4().hex[:8].upper()}'
+        super(RicoveroTable, self).save(*args, **kwargs)
     def __str__(self):
         return self.codiceRicovero # serve per nominare le tabelle nel DB
 

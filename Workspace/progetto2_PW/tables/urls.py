@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views as table_views
+from .import views as table_views
 from django.views.generic import ListView,DetailView
 
 from .models import PatologiaTable, OspedaleTable

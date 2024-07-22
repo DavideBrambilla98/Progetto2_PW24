@@ -6,3 +6,6 @@ class RicoveroTableForm(forms.ModelForm):
     class Meta:
         model = RicoveroTable
         fields = '__all__'
+        widgets = {
+            'codiceRicovero' : forms.TextInput(attrs={'readonly':'readonly'}),
+        }
