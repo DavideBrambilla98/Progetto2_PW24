@@ -5,6 +5,9 @@ __pycache__/
 .pyc
 .pyo
 .pyd
+admin.cpython-312.pyc
+.cpython-312.pyc
+admin.cpython-312
 
 # C extensions
 *.so
@@ -84,15 +87,6 @@ celerybeat-schedule
 
 # SageMath parsed files
 *.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
 # Spyder project settings
 .spyderproject
