@@ -17,7 +17,7 @@ switch (true) {
         pulsanteOspedale.style.color = "#a3a2a2";
         pulsanteVirus.style.color = "#a3a2a2";
         break;
-    case pagina.includes("persona"):
+    case pagina.includes("cittadino"):
         pulsanteHome.style.color = "#a3a2a2";
         pulsantePersona.style.color = "#0047AB";
         pulsanteOspedale.style.color = "#a3a2a2";

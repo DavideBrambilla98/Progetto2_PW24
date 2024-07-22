@@ -2,14 +2,16 @@
 
 <title>
     {% block head_title %} 
-        {{ block.super }} | Ospedali 
+        {{ block.super }} | Cittadini
     {% endblock head_title %}
 </title>
 
 {% block search_option %}
-    <option value="1">Nome ospedale</option>
-    <option value="2">Comune ospedale</option>
-    <option value="3">direttore sanitario</option>
+    <option value="1">Cittadino</option>
+    <option value="2">CSSN</option>
+    <option value="3">Data di nascita</option>
+    <option value="4">Luogo di nascita</option>
+    <option value="5">Indirizzo</option>
 {% endblock search_option %}
 
 {% block content %}
@@ -17,19 +19,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Cittadino</th>
+                    <th>CSSN</th>
+                    <th>Data Nascita</th>
+                    <th>Luogo Nascita</th>
                     <th>Indirizzo</th>
-                    <th>Comune</th>
-                    <th>Direttore Sanitario</th>
                 </tr>
             </thead>
             <tbody>
                 {% for object in object_list %}
                 <tr>
-                    <td>{{ object.denominazioneStruttura }}</td>
-                    <td>{{ object.indirizzo }}</td>
-                    <td>{{ object.comune }}</td>
-                    <td>{{ object.direttoreSanitario }}</td>
+                    <td>{{ object.cognome }} {{ object.nome }}</td>
+                    <td>{{ object.codFiscale }} </td>
+                    <td>{{ object.dataNascita }} </td>
+                    <td>{{ object.nasLuogo }}</td>
+                    <td>{{ object.indirizzo }} </td>
+
                 </tr>
                 {% empty %}
                 <tr>

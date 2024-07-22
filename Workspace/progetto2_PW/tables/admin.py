@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import PatologiaTable, RicoveroTable, OspedaleTable
+
+# Register your models here.
+
+from .models import PatologiaTable, RicoveroTable, OspedaleTable, PersoneTable
+
 
 
 class PatologiaTableAdmin(admin.ModelAdmin):
@@ -26,6 +30,15 @@ class OspedaleTableAdmin(admin.ModelAdmin):
     class Meta:
         model = OspedaleTable
 
+class PersoneTableAdmin(admin.ModelAdmin):
+    list_display = ['codFiscale']
+    list_filter = ['codFiscale']
+    search_fields = ['codFiscale']
+
+    class Meta:
+        model = PersoneTable
+
 admin.site.register(PatologiaTable, PatologiaTableAdmin)
 admin.site.register(RicoveroTable, RicoveroTableAdmin)
 admin.site.register(OspedaleTable, OspedaleTableAdmin)
+admin.site.register(PersoneTable, PersoneTableAdmin)
