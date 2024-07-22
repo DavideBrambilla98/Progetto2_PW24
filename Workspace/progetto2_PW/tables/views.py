@@ -1,13 +1,22 @@
 from django.shortcuts import render
 
+<<<<<<< Updated upstream
 from .models import PatologiaTable
 from django.db.models import Q
+=======
+# Create your views here.
+
+>>>>>>> Stashed changes
 from .models import PatologiaTable, RicoveroTable
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+<<<<<<< Updated upstream
 from .forms import RicoveroTableForm
 
+=======
+from tables.forms import RicoveroTableForm
+>>>>>>> Stashed changes
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
@@ -37,16 +46,21 @@ class RicoveroTableCreate(CreateView):
     model = RicoveroTable
     form_class = RicoveroTableForm
     template_name = 'crud.html'
-    success_url = reverse_lazy('listaPers')
+    success_url = reverse_lazy('listaRic')
 
 class RicoveroTableUpdate(UpdateView):
     model = RicoveroTable
     form_class = RicoveroTableForm
     template_name = 'crud.html'
-    success_url = reverse_lazy('listaPers')
+    success_url = reverse_lazy('listaRic')
+
+    def get_form(self, *args, **kwargs):
+        form = super(RicoveroTableUpdate, self).get_form(*args, **kwargs)
+        form.fields['codiceRicovero'].widget.attrs['readonly'] = True
+        return form
 
 
 class RicoveroTableDelete(DeleteView):
     model = RicoveroTable
     template_name = 'crud_delete.html'
-    success_url = reverse_lazy('listaPers')
+    success_url = reverse_lazy('listaRic')

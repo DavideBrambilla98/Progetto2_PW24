@@ -1,4 +1,4 @@
-<h1>{% if form.instance.pk %}Modifica{% else %}Crea{% endif %} Mio Modello</h1>
+<h1>{% if form.instance.pk %}Modifica{% else %}Crea{% endif %} crud</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
