@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Ospedali 
+    {% endblock head_title %}
+</title>
+
+{% block search_option %}
+    <option value="1">Nome ospedale</option>
+    <option value="2">Comune ospedale</option>
+    <option value="3">direttore sanitario</option>
+{% endblock search_option %}
+
+{% block content %}
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Codice Struttura</th>
+                    <th>Nome</th>
+                    <th>Indirizzo</th>
+                    <th>Comune</th>
+                    <th>Descrizione</th>
+                    <th>Direttore Sanitario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.codiceStruttura }}</td>
+                    <td>{{ object.denominazioneStruttura }}</td>
+                    <td>{{ object.indirizzo }}</td>
+                    <td>{{ object.comune }}</td>
+                    <td>{{ object.descrizioneTipoStruttura }}</td>
+                    <td>{{ object.direttoreSanitario }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nessun record trovato</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

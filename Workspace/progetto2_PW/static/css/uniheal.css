@@ -13,12 +13,12 @@ header {
 
 /* Stile della navigazione*/
 /*=================================================================================================*/
-.nameNav {
+/*.nameNav {
     color: #a3a2a2;
     margin-left: 4px;
     display: inline-block;
 }
-
+*/
 .nameNav:hover {
     color: #ff004f;
 }

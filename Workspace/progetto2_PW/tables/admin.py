@@ -1,12 +1,12 @@
 from django.contrib import admin
-<<<<<<< Updated upstream
-# Register your models here.
-from .models import PatologiaTable
-=======
-from .models import PatologiaTable, RicoveroTable, OspedaleTable, PersoneTable
->>>>>>> Stashed changes
 
-class TableAdmin(admin.ModelAdmin):
+# Register your models here.
+
+from .models import PatologiaTable, RicoveroTable, OspedaleTable, PersoneTable
+
+
+
+class PatologiaTableAdmin(admin.ModelAdmin):
     list_display = ['__str__']
     list_filter = ['nome','codice']
     search_fields = ['nome','codice']
@@ -14,9 +14,6 @@ class TableAdmin(admin.ModelAdmin):
     class Meta:
         model = PatologiaTable
 
-<<<<<<< Updated upstream
-admin.site.register(PatologiaTable, TableAdmin)
-=======
 class RicoveroTableAdmin(admin.ModelAdmin):
     list_display = ['codiceRicovero']
     list_filter = ['codiceRicovero']
@@ -33,7 +30,6 @@ class OspedaleTableAdmin(admin.ModelAdmin):
     class Meta:
         model = OspedaleTable
 
-
 class PersoneTableAdmin(admin.ModelAdmin):
     list_display = ['codFiscale']
     list_filter = ['codFiscale']
@@ -42,9 +38,7 @@ class PersoneTableAdmin(admin.ModelAdmin):
     class Meta:
         model = PersoneTable
 
-
 admin.site.register(PatologiaTable, PatologiaTableAdmin)
 admin.site.register(RicoveroTable, RicoveroTableAdmin)
 admin.site.register(OspedaleTable, OspedaleTableAdmin)
 admin.site.register(PersoneTable, PersoneTableAdmin)
->>>>>>> Stashed changes

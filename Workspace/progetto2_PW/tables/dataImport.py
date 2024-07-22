@@ -1,7 +1,8 @@
 #Classe che serve a importare i valori del DB in excel all'interno del DB sqlite
 import pandas as pd
-from .models import PatologiaTable
+
 from .models import PatologiaTable, OspedaleTable, PersoneTable
+
 from .models import RicoveroTable
 from django.db import transaction
 
