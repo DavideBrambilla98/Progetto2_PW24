@@ -8,6 +8,7 @@ __pycache__/
 admin.cpython-312.pyc
 .cpython-312.pyc
 admin.cpython-312
+**/*.pyc
 
 # C extensions
 *.so
@@ -110,4 +111,3 @@ dmypy.json
 .idea/misc.xml
 .idea/Progetto2_PW24.iml
 .idea/vcs.xml
-Workspace/progetto2_PW/progetto2_PW/__pycache__/__init__.cpython-312.pyc
