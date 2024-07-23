@@ -1,5 +1,6 @@
 import uuid
-
+import random
+import string
 from django.db import models
 
 # Create your models here.
@@ -24,8 +25,14 @@ class RicoveroTable(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.codiceRicovero:
-            self.codiceRicovero = f'RIC-{uuid.uuid4().hex[:8].upper()}'
+            self.codiceRicovero = self.generate_codiceRicovero()
         super(RicoveroTable, self).save(*args, **kwargs)
+
+    def generate_codiceRicovero(self):
+        digit1 = ''.join(random.choices(string.digits, k=3))
+        letter = ''.join(random.choices(string.ascii_uppercase, k=4))
+        digit2 = ''.join(random.choices(string.digits, k=5))
+        return f'{digit1}{letter}{digit2}'
     def __str__(self):
         return self.codiceRicovero # serve per nominare le tabelle nel DB
 
@@ -58,8 +65,8 @@ class PersoneTable(models.Model):
             return self.codFiscale  # serve per nominare le tabelle nel DB
 
 class PatologiaRicoveroTable(models.Model):
-    codOspedale = models.CharField(max_length=20)
-    codRicovero = models.CharField(max_length=20)
-    codPatologia = models.CharField(max_length=20)
+    codOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
+    codRicovero = models.ForeignKey(RicoveroTable, on_delete=models.CASCADE)
+    codPatologia = models.ForeignKey(PatologiaTable, on_delete=models.CASCADE)
     def __str__(self):
         return self.codRicovero  # serve per nominare le tabelle nel DB
