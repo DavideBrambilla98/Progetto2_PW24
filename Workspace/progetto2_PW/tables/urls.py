@@ -29,7 +29,9 @@ urlpatterns = [
         queryset=PersoneTable.objects.all().order_by("codFiscale"),
         template_name="cittadini.html"), name='listaPers'),
 
+
     path('create/', RicoveroTableCreate.as_view(), name='create'),
     path('update/<int:pk>', RicoveroTableUpdate.as_view(), name='update'),
     path('delete/<int:pk>', RicoveroTableDelete.as_view(), name='delete'),
+
 ]

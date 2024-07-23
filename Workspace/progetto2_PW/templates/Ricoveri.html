@@ -5,7 +5,10 @@
         {{ block.super }} | Ricoveri 
     {% endblock head_title %}
 </title>
-
+ <!-- Pulsante "Create" in cima alla pagina -->
+    <a href="{% url 'create' %}">
+        <button type="button">Crea Nuovo Ricovero</button>
+    </a>
 {% block search_option %}
     <option value="1">Paziente</option>
     <option value="2">CSSN</option>
@@ -26,6 +29,7 @@
                     <th>Data</th>
                     <th>Durata</th>
                     <th>Costo</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +42,17 @@
                     <td>{{ object.data }}</td>
                     <td>{{ object.durata }} gg</td>
                     <td>{{ object.costo }} €</td>
+                     <td>
+                    <!-- Pulsante "Update" -->
+                    <a href="{% url 'update' ricovero.pk %}">
+                        <button type="button">Modifica</button>
+                    </a>
+
+                    <!-- Pulsante "Delete" -->
+                    <a href="{% url 'delete' ricovero.pk %}">
+                        <button type="button">Elimina</button>
+                    </a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>
