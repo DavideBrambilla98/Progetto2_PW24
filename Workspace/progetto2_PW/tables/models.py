@@ -1,4 +1,3 @@
-import uuid
 import random
 import string
 from django.db import models

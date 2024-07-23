@@ -1,7 +1,12 @@
-<h1>Conferma Cancellazione</h1>
-<p>Sei sicuro di voler cancellare "{{ object }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Conferma</button>
-</form>
-<a href="{% url 'listaRic' %}">Annulla</a>
+<head>
+    <title>Conferma Eliminazione Ricovero</title>
+</head>
+<body>
+    <h1>Conferma Eliminazione Ricovero</h1>
+    <p>Sei sicuro di voler eliminare il ricovero "{{ object }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Conferma</button>
+    </form>
+    <a href="{% url 'listaRic' %}">Annulla</a>
+</body>

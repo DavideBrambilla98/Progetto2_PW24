@@ -1,3 +1,5 @@
+from msilib.schema import ListView
+
 from django.shortcuts import render
 # Create your views here.
 from .models import PatologiaTable, RicoveroTable, PatologiaRicoveroTable
@@ -63,3 +65,5 @@ class RicoveroTableDelete(DeleteView):
     model = RicoveroTable
     template_name = 'crud_delete.html'
     success_url = reverse_lazy('listaRic')
+
+
