@@ -68,7 +68,7 @@ def searchCittadini(request):
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = CittadinoTable.objects.filter(Q(cognome__icontains=1) & ~Q(nomme__icontains=1))
+            queryset = CittadinoTable.objects.filter(cognome__contains=search_value)
         elif search_option == '2':
             queryset = CittadinoTable.objects.filter(codFiscale__icontains=search_value)
         elif search_option == '3':
@@ -80,4 +80,4 @@ def searchCittadini(request):
     else:
         queryset = CittadinoTable.objects.all()
 
-    return render(request, 'Ricoveri.html', {'queryset': queryset})
+    return render(request, 'cittadini.html', {'queryset': queryset})

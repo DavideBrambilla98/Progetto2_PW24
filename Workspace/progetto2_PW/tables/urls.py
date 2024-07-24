@@ -17,5 +17,5 @@ urlpatterns = [
     path('patologia/', searchPatologie, name='listaPat'),
     path('osepdale/', searchOspedali, name='listaOsp'),
     path('', searchRicoveri, name='listaRic'),
-    path('', searchCittadini, name='listaPers'),
+    path('cittadino/', searchCittadini, name='listaPers'),
 ]
