@@ -14,9 +14,9 @@ class PatologiaTable(models.Model):
         return self.nome # serve per nominare le tabelle nel DB
 
 class RicoveroTable(models.Model):
-    codiceOspedale = models.CharField(max_length=10)
+    codiceOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
     codiceRicovero = models.CharField(max_length=20, unique=True, editable=False)
-    paziente = models.CharField(max_length=20)
+    paziente = models.ForeignKey(PersoneTable, on_delete=models.CASCADE)
     data = models.DateField()
     durata = models.IntegerField()
     motivo = models.CharField(max_length=50)
