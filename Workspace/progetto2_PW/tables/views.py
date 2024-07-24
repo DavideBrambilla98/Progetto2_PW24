@@ -56,8 +56,9 @@ class RicoveroTableUpdate(UpdateView):
     success_url = reverse_lazy('listaRic')
 
     def get_form(self, *args, **kwargs):
-        form = super(RicoveroTableUpdate, self).get_form(*args, **kwargs)
-        form.fields['codiceRicovero'].widget.attrs['readonly'] = True
+        form = super().get_form(*args, **kwargs)
+        if 'codiceRicovero' in form.fields:
+            form.fields['codiceRicovero'].widget.attrs['readonly'] = True
         return form
 
 

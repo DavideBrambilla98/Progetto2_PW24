@@ -30,8 +30,8 @@ urlpatterns = [
         template_name="cittadini.html"), name='listaPers'),
 
 
-    path('create/', RicoveroTableCreate.as_view(), name='create'),
-    path('update/<int:pk>', RicoveroTableUpdate.as_view(), name='update'),
-    path('delete/<int:pk>', RicoveroTableDelete.as_view(), name='delete'),
+    path('create/', table_views.RicoveroTableCreate.as_view(), name='RicCreate'),
+    path('update/<int:pk>/', table_views.RicoveroTableUpdate.as_view(), name='RicUpdate'),
+    path('delete/<int:pk>/', table_views.RicoveroTableDelete.as_view(), name='RicDelete'),
 
 ]
