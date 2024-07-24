@@ -5,8 +5,7 @@
         {{ block.super }} | Ricoveri 
     {% endblock head_title %}
 </title>
- <!-- Pulsante "Create" in cima alla pagina -->
-    
+
 {% block search_option %}
     <option value="1">Paziente</option>
     <option value="2">CSSN</option>
@@ -16,9 +15,6 @@
 {% endblock search_option %}
 
 {% block content %}
-    <a href="{% url 'RicCreate' %}">
-        <button type="button">Crea Nuovo Ricovero</button>
-    </a>
     <div class="container-fluid">
         <table class="table">
             <thead>
@@ -30,7 +26,6 @@
                     <th>Data</th>
                     <th>Durata</th>
                     <th>Costo</th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -43,17 +38,6 @@
                     <td>{{ object.data }}</td>
                     <td>{{ object.durata }} gg</td>
                     <td>{{ object.costo }} €</td>
-                     <td>
-                    <!-- Pulsante "Update" -->
-                    <a href="{% url 'RicUpdate' object.pk %}">
-                        <button type="button">Modifica</button>
-                    </a>
-
-                    <!-- Pulsante "Delete" -->
-                    <a href="{% url 'RicDelete' object.pk %}">
-                        <button type="button">Elimina</button>
-                    </a>
-                    </td>
                 </tr>
                 {% empty %}
                 <tr>

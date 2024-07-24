@@ -1,12 +1,11 @@
 from django.urls import path
-from .import views as table_views
+from . import views as table_views
 from django.views.generic import ListView,DetailView
 
 from .models import PatologiaTable, OspedaleTable
 from .models import RicoveroTable
 from .views import searchPatologie
 from .models import PersoneTable
-from .views import RicoveroTableCreate, RicoveroTableDelete, RicoveroTableUpdate
 
 
 # listview mostra il contenuto del DB sotto forma di lista
@@ -28,10 +27,4 @@ urlpatterns = [
     path('cittadino/', ListView.as_view(
         queryset=PersoneTable.objects.all().order_by("codFiscale"),
         template_name="cittadini.html"), name='listaPers'),
-
-
-    path('create/', table_views.RicoveroTableCreate.as_view(), name='RicCreate'),
-    path('update/<int:pk>/', table_views.RicoveroTableUpdate.as_view(), name='RicUpdate'),
-    path('delete/<int:pk>/', table_views.RicoveroTableDelete.as_view(), name='RicDelete'),
-
 ]

@@ -1,5 +1,3 @@
-import random
-import string
 from django.db import models
 
 # Create your models here.
@@ -14,24 +12,14 @@ class PatologiaTable(models.Model):
         return self.nome # serve per nominare le tabelle nel DB
 
 class RicoveroTable(models.Model):
-    codiceOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
-    codiceRicovero = models.CharField(max_length=20, unique=True, editable=False)
-    paziente = models.ForeignKey(PersoneTable, on_delete=models.CASCADE)
+    codiceOspedale = models.CharField(max_length=10)
+    codiceRicovero = models.CharField(max_length=20)
+    paziente = models.CharField(max_length=20)
     data = models.DateField()
     durata = models.IntegerField()
     motivo = models.CharField(max_length=50)
     costo = models.IntegerField()
-
-    def save(self, *args, **kwargs):
-        if not self.codiceRicovero:
-            self.codiceRicovero = self.generate_codiceRicovero()
-        super(RicoveroTable, self).save(*args, **kwargs)
-
-    def generate_codiceRicovero(self):
-        digit1 = ''.join(random.choices(string.digits, k=3))
-        letter = ''.join(random.choices(string.ascii_uppercase, k=4))
-        digit2 = ''.join(random.choices(string.digits, k=5))
-        return f'{digit1}{letter}{digit2}'
+    
     def __str__(self):
         return self.codiceRicovero # serve per nominare le tabelle nel DB
 
@@ -64,8 +52,8 @@ class PersoneTable(models.Model):
             return self.codFiscale  # serve per nominare le tabelle nel DB
 
 class PatologiaRicoveroTable(models.Model):
-    codOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
-    codRicovero = models.ForeignKey(RicoveroTable, on_delete=models.CASCADE)
-    codPatologia = models.ForeignKey(PatologiaTable, on_delete=models.CASCADE)
+    codOspedale = models.CharField(max_length=20)
+    codRicovero = models.CharField(max_length=20)
+    codPatologia = models.CharField(max_length=20)
     def __str__(self):
         return self.codRicovero  # serve per nominare le tabelle nel DB

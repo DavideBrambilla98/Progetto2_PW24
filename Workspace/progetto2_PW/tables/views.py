@@ -1,12 +1,6 @@
-from msilib.schema import ListView
-
 from django.shortcuts import render
-# Create your views here.
-from .models import PatologiaTable, RicoveroTable, PatologiaRicoveroTable
+from .models import PatologiaTable
 from django.db.models import Q
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from tables.forms import RicoveroTableForm
 
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -31,40 +25,4 @@ def searchPatologie(request):
         queryset = PatologiaTable.objects.all()
 
     return render(request, 'Patologie.html', {'queryset': queryset})
-
-
-class RicoveroTableCreate(CreateView):
-    model = RicoveroTable
-    form_class = RicoveroTableForm
-    template_name = 'crud.html'
-    success_url = reverse_lazy('listaRic')
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        codPatologia = form.cleaned_data.get('codPatologia')
-        if codPatologia:
-            PatologiaRicoveroTable.objects.create(
-                codRicovero = self.object,
-                codPatologia = codPatologia,
-                codOspedale = self.object
-            )
-        return response
-class RicoveroTableUpdate(UpdateView):
-    model = RicoveroTable
-    form_class = RicoveroTableForm
-    template_name = 'crud.html'
-    success_url = reverse_lazy('listaRic')
-
-    def get_form(self, *args, **kwargs):
-        form = super().get_form(*args, **kwargs)
-        if 'codiceRicovero' in form.fields:
-            form.fields['codiceRicovero'].widget.attrs['readonly'] = True
-        return form
-
-
-class RicoveroTableDelete(DeleteView):
-    model = RicoveroTable
-    template_name = 'crud_delete.html'
-    success_url = reverse_lazy('listaRic')
-
 
