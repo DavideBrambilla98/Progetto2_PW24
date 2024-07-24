@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import PatologiaTable, RicoveroTable, OspedaleTable, PersoneTable, PatologiaRicoveroTable
+from .models import PatologiaTable, RicoveroTable, OspedaleTable, CittadinoTable, PatologiaRicoveroTable
 
 
 
@@ -36,7 +36,7 @@ class PersoneTableAdmin(admin.ModelAdmin):
     search_fields = ['codFiscale']
 
     class Meta:
-        model = PersoneTable
+        model = CittadinoTable
 
 class PatologiaRicoveroTableAdmin(admin.ModelAdmin):
     list_display = ['codOspedale','codRicovero','codPatologia']
@@ -49,5 +49,5 @@ class PatologiaRicoveroTableAdmin(admin.ModelAdmin):
 admin.site.register(PatologiaTable, PatologiaTableAdmin)
 admin.site.register(RicoveroTable, RicoveroTableAdmin)
 admin.site.register(OspedaleTable, OspedaleTableAdmin)
-admin.site.register(PersoneTable, PersoneTableAdmin)
+admin.site.register(CittadinoTable, PersoneTableAdmin)
 admin.site.register(PatologiaRicoveroTable, PatologiaRicoveroTableAdmin)

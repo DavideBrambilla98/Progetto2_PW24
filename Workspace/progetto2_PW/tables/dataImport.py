@@ -1,7 +1,7 @@
 # Classe che serve a importare i valori del DB in excel all'interno del DB sqlite
 import pandas as pd
 
-from .models import PatologiaTable, OspedaleTable, PersoneTable, PatologiaRicoveroTable
+from .models import PatologiaTable, OspedaleTable, CittadinoTable, PatologiaRicoveroTable
 
 from .models import RicoveroTable
 from django.db import transaction
@@ -86,7 +86,7 @@ dati = df.to_dict('records')
 with transaction.atomic():
     for riga in dati:
         # Crea un nuovo oggetto PersoneTable per ogni riga
-        persona = PersoneTable(
+        persona = CittadinoTable(
             cognome=riga['cognome'],
             nome=riga['nome'],
             nasLuogo=riga['nasLuogo'],

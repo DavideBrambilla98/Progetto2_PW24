@@ -2,10 +2,10 @@ from django.urls import path
 from . import views as table_views
 from django.views.generic import ListView,DetailView
 
-from .models import PatologiaTable, OspedaleTable
+from .models import PatologiaTable, OspedaleTable, CittadinoTable
 from .models import RicoveroTable
-from .views import searchPatologie
-from .models import PersoneTable
+from .views import searchPatologie, searchOspedali, searchRicoveri, searchCittadini
+from .models import CittadinoTable
 
 
 # listview mostra il contenuto del DB sotto forma di lista
@@ -15,16 +15,7 @@ from .models import PersoneTable
 urlpatterns = [
   
     path('patologia/', searchPatologie, name='listaPat'),
-    
-    path('', ListView.as_view(
-        queryset=RicoveroTable.objects.all().order_by("paziente"),
-        template_name="Ricoveri.html"), name='listaRic'),
-        
-    path('ospedale/', ListView.as_view(
-        queryset=OspedaleTable.objects.all().order_by("denominazioneStruttura"),
-        template_name="Ospedali.html"), name='listaOsp'),
-        
-    path('cittadino/', ListView.as_view(
-        queryset=PersoneTable.objects.all().order_by("codFiscale"),
-        template_name="cittadini.html"), name='listaPers'),
+    path('osepdale/', searchOspedali, name='listaOsp'),
+    path('', searchRicoveri, name='listaRic'),
+    path('', searchCittadini, name='listaPers'),
 ]

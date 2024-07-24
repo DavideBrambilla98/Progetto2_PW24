@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for object in object_list %}
+                {% for object in queryset %}
                 <tr>
                     <td>{{ object.cognome }} {{ object.nome }}</td>
                     <td>{{ object.codFiscale }} </td>

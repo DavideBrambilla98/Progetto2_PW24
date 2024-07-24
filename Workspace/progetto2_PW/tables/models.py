@@ -34,7 +34,7 @@ class OspedaleTable(models.Model):
     def __str__(self):
         return self.denominazioneStruttura # serve per nominare le tabelle nel DB
 
-class PersoneTable(models.Model):
+class CittadinoTable(models.Model):
         cognome = models.CharField(max_length=20)
         nome = models.CharField(max_length=20)
         nasLuogo = models.CharField(max_length=20)
