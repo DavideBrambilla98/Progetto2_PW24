@@ -15,7 +15,7 @@ from .models import CittadinoTable
 urlpatterns = [
   
     path('patologia/', searchPatologie, name='listaPat'),
-    path('osepdale/', searchOspedali, name='listaOsp'),
+    path('ospedale/', searchOspedali, name='listaOsp'),
     path('', searchRicoveri, name='listaRic'),
     path('cittadino/', searchCittadini, name='listaPers'),
 ]

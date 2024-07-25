@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.db.models import Q
-from .models import PatologiaTable, RicoveroTable, OspedaleTable , CittadinoTable
+from django.db.models import Q, F, Value
+from django.db.models.functions import Concat
+from .models import PatologiaTable, RicoveroTable, OspedaleTable, CittadinoTable
 
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
-    if search_option =='3' or search_option =='4' or search_option =='5' or search_option =='6':
+    if search_option == '3' or search_option == '4' or search_option == '5' or search_option == '6':
         search_value = '1'
 
     if search_option and search_value:
@@ -14,13 +15,13 @@ def searchPatologie(request):
         elif search_option == '2':
             queryset = PatologiaTable.objects.filter(criticita__icontains=search_value)
         elif search_option == '3':
-            queryset = PatologiaTable.objects.filter(Q(cronica__icontains=1) & ~Q(mortale__icontains=1))
+            queryset = PatologiaTable.objects.filter(Q(cronica='1') & ~Q(mortale='1'))
         elif search_option == '4':
-            queryset = PatologiaTable.objects.filter(~Q(cronica__icontains=1) & Q(mortale__icontains=1))
+            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & Q(mortale='1'))
         elif search_option == '5':
-            queryset = PatologiaTable.objects.filter(Q(cronica__icontains=1) & Q(mortale__icontains=1))
+            queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1'))
         elif search_option == '6':
-            queryset = PatologiaTable.objects.filter(~Q(cronica__icontains=1) & ~Q(mortale__icontains=1))
+            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1'))
     else:
         queryset = PatologiaTable.objects.all()
 
@@ -48,17 +49,22 @@ def searchRicoveri(request):
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = RicoveroTable.objects.filter(paziente__icontains=search_value)
+            # Annotate con il campo concatenato
+            queryset = RicoveroTable.objects.annotate(
+                paziente_full_name=Concat(
+                    'paziente__nome',
+                    Value(' '),  # Aggiungi uno spazio tra nome e cognome
+                    'paziente__cognome'
+                )
+            ).filter(
+                paziente_full_name__icontains=search_value
+            )
         elif search_option == '2':
-            queryset = RicoveroTable.objects.filter(paziente__icontains=search_value)
+            queryset = RicoveroTable.objects.filter(paziente__codFiscale__icontains=search_value)
         elif search_option == '3':
-            queryset = RicoveroTable.objects.filter(codiceOspedale__icontains=search_value)
-        elif search_option == '4':
-            queryset = RicoveroTable.objects.filter(motivo__icontains=search_value)
-        elif search_option == '5':
-            queryset = RicoveroTable.objects.filter(data__icontains=search_value)
+            queryset = RicoveroTable.objects.filter(codiceOspedale__denominazioneStruttura__icontains=search_value)
     else:
-        queryset = RicoveroTable.objects.all()
+        queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all() #paziente è il nome del campo foreignkey diRicoveroTable
 
     return render(request, 'Ricoveri.html', {'queryset': queryset})
 
@@ -68,11 +74,11 @@ def searchCittadini(request):
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = CittadinoTable.objects.filter(cognome__contains=search_value)
+            queryset = CittadinoTable.objects.filter(cognome__icontains=search_value)
         elif search_option == '2':
             queryset = CittadinoTable.objects.filter(codFiscale__icontains=search_value)
         elif search_option == '3':
-            queryset = CittadinoTable.objects.filter(daraNascita__icontains=search_value)
+            queryset = CittadinoTable.objects.filter(dataNascita__icontains=search_value)
         elif search_option == '4':
             queryset = CittadinoTable.objects.filter(nasLuogo__icontains=search_value)
         elif search_option == '5':
@@ -80,4 +86,4 @@ def searchCittadini(request):
     else:
         queryset = CittadinoTable.objects.all()
 
-    return render(request, 'cittadini.html', {'queryset': queryset})
+    return render(request, 'Cittadini.html', {'queryset': queryset})

@@ -1,123 +1,110 @@
-# Classe che serve a importare i valori del DB in excel all'interno del DB sqlite
 import pandas as pd
-
-from .models import PatologiaTable, OspedaleTable, CittadinoTable, PatologiaRicoveroTable
-
-from .models import RicoveroTable
 from django.db import transaction
+from django.core.exceptions import ObjectDoesNotExist
+from .models import PatologiaTable, OspedaleTable, CittadinoTable, PatologiaRicoveroTable, RicoveroTable
 
 try:
     import openpyxl
 except ImportError:
     print("Il modulo openpyxl non è installato. Installalo con 'pip install openpyxl'.")
 
-
 def importa_dati_da_excel():
-    # Leggi il file excel
+    # Importa i dati delle patologie
     df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Patologie')
-
-    # Crea una lista di dizionari, dove ogni dizionario rappresenta una riga del DataFrame
     dati = df.to_dict('records')
-
-    # Usa una transazione per assicurarti che tutti i dati vengano inseriti correttamente
     with transaction.atomic():
         for riga in dati:
-            # Crea un nuovo oggetto PatologiaTable per ogni riga
-            patologia = PatologiaTable(
+            patologia, created = PatologiaTable.objects.get_or_create(
                 codice=riga['Codice'],
-                nome=riga['Nome'],
-                criticita=riga['Criticita'],
-                cronica=riga['Cronica'],
-                mortale=riga['Mortale']
+                defaults={
+                    'nome': riga['Nome'],
+                    'criticita': riga['Criticita'],
+                    'cronica': riga['Cronica'],
+                    'mortale': riga['Mortale']
+                }
             )
-            # Salva l'oggetto nel database
-            patologia.save()
 
-    # Leggi il file excel
-    df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Ricoveri')
-
-    # Crea una lista di dizionari, dove ogni dizionario rappresenta una riga del DataFrame
+    # Importa i dati dei cittadini
+    df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Persone')
     dati = df.to_dict('records')
-
-    # Usa una transazione per assicurarti che tutti i dati vengano inseriti correttamente
     with transaction.atomic():
         for riga in dati:
-            # Crea un nuovo oggetto RicoveroTable per ogni riga
-            ricovero = RicoveroTable(
-                codiceOspedale=riga['CodOspedale'],
-                codiceRicovero=riga['CodiceRicovero'],
-                paziente=riga['Paziente'],
-                data=riga['Data'],
-                durata=riga['Durata'],
-                motivo=riga['Motivo'],
-                costo=riga['Costo'],
+            cittadino, created = CittadinoTable.objects.get_or_create(
+                codFiscale=riga['codFiscale'],
+                defaults={
+                    'cognome': riga['cognome'],
+                    'nome': riga['nome'],
+                    'nasLuogo': riga['nasLuogo'],
+                    'nasRegione': riga['nasRegione'],
+                    'nasProv': riga['nasProv'],
+                    'nasCap': riga['nasCap'],
+                    'dataNascita': riga['dataNascita'],
+                    'resLuogo': riga['resLuogo'],
+                    'resRegione': riga['resRegione'],
+                    'resProv': riga['resProv'],
+                    'resCap': riga['resCap'],
+                    'indirizzo': riga['indirizzo']
+                }
             )
-            # Salva l'oggetto nel database
-            ricovero.save()
 
-        # Leggi il file excel
+    # Importa i dati degli ospedali
     df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Ospedali')
-
-    # Crea una lista di dizionari, dove ogni dizionario rappresenta una riga del DataFrame
     dati = df.to_dict('records')
-
-    # Usa una transazione per assicurarti che tutti i dati vengano inseriti correttamente
     with transaction.atomic():
         for riga in dati:
-            # Crea un nuovo oggetto PatologiaTable per ogni riga
-            ospedale = OspedaleTable(
-                codiceStruttura=riga['Codicestruttura'],
-                denominazioneStruttura=riga['DenominazioneStruttura'],
-                indirizzo=riga['Indirizzo'],
-                comune=riga['Comune'],
-                descrizioneTipoStruttura=riga['DescrizioneTipoStruttura'],
-                direttoreSanitario=riga['DirettoreSanitario'],
-            )
-            # Salva l'oggetto nel database
-            ospedale.save()
+            try:
+                direttore_sanitario = CittadinoTable.objects.get(codFiscale=riga['DirettoreSanitario'])
+                ospedale, created = OspedaleTable.objects.get_or_create(
+                    codiceStruttura=riga['Codicestruttura'],
+                    defaults={
+                        'denominazioneStruttura': riga['DenominazioneStruttura'],
+                        'indirizzo': riga['Indirizzo'],
+                        'comune': riga['Comune'],
+                        'descrizioneTipoStruttura': riga['DescrizioneTipoStruttura'],
+                        'direttoreSanitario': direttore_sanitario
+                    }
+                )
+            except ObjectDoesNotExist:
+                print(f"Direttore sanitario non trovato: {riga['DirettoreSanitario']}")
 
+    # Importa i dati dei ricoveri
+    df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Ricoveri')
+    dati = df.to_dict('records')
+    with transaction.atomic():
+        for riga in dati:
+            try:
+                paziente = CittadinoTable.objects.get(codFiscale=riga['Paziente'])
+                ospedale = OspedaleTable.objects.get(codiceStruttura=riga['CodOspedale'])
+                ricovero, created = RicoveroTable.objects.get_or_create(
+                    codiceRicovero=riga['CodiceRicovero'],
+                    defaults={
+                        'codiceOspedale': ospedale,
+                        'paziente': paziente,
+                        'data': riga['Data'],
+                        'durata': riga['Durata'],
+                        'motivo': riga['Motivo'],
+                        'costo': riga['Costo']
+                    }
+                )
+            except ObjectDoesNotExist as e:
+                print(f"Errore nell'importazione del ricovero: {e}")
 
-df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='Persone')
+    # Importa i dati delle patologie ricoveri
+    df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='PatologiaRicovero')
+    dati = df.to_dict('records')
+    with transaction.atomic():
+        for riga in dati:
+            try:
+                ospedale = OspedaleTable.objects.get(codiceStruttura=riga['CodOspedale'])
+                ricovero = RicoveroTable.objects.get(codiceRicovero=riga['CodiceRicovero'])
+                patologia = PatologiaTable.objects.get(codice=riga['CodPatologia'])
+                patologia_ricovero, created = PatologiaRicoveroTable.objects.get_or_create(
+                    codOspedale=ospedale,
+                    codRicovero=ricovero,
+                    codPatologia=patologia
+                )
+            except ObjectDoesNotExist as e:
+                print(f"Errore nell'importazione della patologia ricovero: {e}")
 
-# Crea una lista di dizionari, dove ogni dizionario rappresenta una riga del DataFrame
-dati = df.to_dict('records')
-
-# Usa una transazione per assicurarti che tutti i dati vengano inseriti correttamente
-with transaction.atomic():
-    for riga in dati:
-        # Crea un nuovo oggetto PersoneTable per ogni riga
-        persona = CittadinoTable(
-            cognome=riga['cognome'],
-            nome=riga['nome'],
-            nasLuogo=riga['nasLuogo'],
-            nasRegione=riga['nasRegione'],
-            nasProv=riga['nasProv'],
-            nasCap=riga['nasCap'],
-            dataNascita=riga['dataNascita'],
-            codFiscale=riga['codFiscale'],
-            resLuogo=riga['resLuogo'],
-            resRegione=riga['resRegione'],
-            resProv=riga['resProv'],
-            resCap=riga['resCap'],
-            indirizzo=riga['indirizzo'],
-
-        )
-        # Salva l'oggetto nel database
-        persona.save()
-
-df = pd.read_excel('../../DB/DataSet.xlsx', sheet_name='PatologiaRicovero')
-
-# Crea una lista di dizionari, dove ogni dizionario rappresenta una riga del DataFrame
-dati = df.to_dict('records')
-
-# Usa una transazione per assicurarti che tutti i dati vengano inseriti correttamente
-with transaction.atomic():
-    for riga in dati:
-        # Crea un nuovo oggetto PatologiaRicoveroTable per ogni riga
-        patologiaRicovero = PatologiaRicoveroTable(
-            codOspedale=riga['CodOspedale'],
-            codRicovero=riga['CodiceRicovero'],
-            codPatologia=riga['CodPatologia'],
-        )
-        # Salva l'oggetto nel database
-        patologiaRicovero.save()
+# Esempio di utilizzo
+importa_dati_da_excel()
