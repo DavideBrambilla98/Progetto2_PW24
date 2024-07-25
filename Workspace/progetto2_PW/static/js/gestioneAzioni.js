@@ -1,7 +1,6 @@
 //=====================================================================================================================
 // Script per mantenere evidenziata la NAV in funzione della pagina attiva
 
-// Estrai il nome della pagina dal URL (aggiunto +1 altrimenti restituirebbe anche / dell'URL)
 var pagina = window.location.pathname;
 
 // Ottieni il pulsante tramite il suo ID

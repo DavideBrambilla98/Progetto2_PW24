@@ -5,37 +5,32 @@
         {{ block.super }} | Ricoveri 
     {% endblock head_title %}
 </title>
- <!-- Pulsante "Create" in cima alla pagina -->
-    
+
 {% block search_option %}
     <option value="1">Paziente</option>
     <option value="2">CSSN</option>
     <option value="3">Nome ospedale</option>
-    <option value="4">Patologia</option>
-    <option value="5">Data</option>
 {% endblock search_option %}
 
 {% block content %}
-    <a href="{% url 'RicCreate' %}">
-        <button type="button">Crea Nuovo Ricovero</button>
-    </a>
     <div class="container-fluid">
         <table class="table">
             <thead>
                 <tr>
                     <th>Paziente</th>
+                    <th>CSSN</th>
                     <th>Ospedale</th>
                     <th>Ricovero</th>
                     <th>Motivo</th>
                     <th>Data</th>
                     <th>Durata</th>
                     <th>Costo</th>
-                    
                 </tr>
             </thead>
             <tbody>
-                {% for object in object_list %}
+                {% for object in queryset %}
                 <tr>
+                    <td>{{ object.paziente.nome }} {{ object.paziente.cognome }}</td>
                     <td>{{ object.paziente }}</td>
                     <td>{{ object.codiceOspedale }}</td>
                     <td>{{ object.codiceRicovero }}</td>
@@ -43,17 +38,6 @@
                     <td>{{ object.data }}</td>
                     <td>{{ object.durata }} gg</td>
                     <td>{{ object.costo }} €</td>
-                     <td>
-                    <!-- Pulsante "Update" -->
-                    <a href="{% url 'RicUpdate' object.pk %}">
-                        <button type="button">Modifica</button>
-                    </a>
-
-                    <!-- Pulsante "Delete" -->
-                    <a href="{% url 'RicDelete' object.pk %}">
-                        <button type="button">Elimina</button>
-                    </a>
-                    </td>
                 </tr>
                 {% empty %}
                 <tr>
