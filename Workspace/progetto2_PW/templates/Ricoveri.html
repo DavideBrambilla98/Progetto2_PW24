@@ -31,8 +31,8 @@
                 {% for object in queryset %}
                 <tr>
                     <td>{{ object.paziente.nome }} {{ object.paziente.cognome }}</td>
-                    <td>{{ object.paziente }}</td>
-                    <td>{{ object.codiceOspedale }}</td>
+                    <td><a href="{% url 'listaPers' object.paziente.codFiscale %}"> {{ object.paziente }}</a></td>
+                    <td><a href="{% url 'listaOsp' object.codiceOspedale.codiceStruttura %}"> {{ object.codiceOspedale }}</a></td>
                     <td>{{ object.codiceRicovero }}</td>
                     <td>{{ object.motivo }}</td>
                     <td>{{ object.data }}</td>

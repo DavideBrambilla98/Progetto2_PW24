@@ -68,7 +68,7 @@ def searchRicoveri(request):
 
     return render(request, 'Ricoveri.html', {'queryset': queryset})
 
-def searchCittadini(request):
+def searchCittadini(request, paziente):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
 
@@ -87,3 +87,11 @@ def searchCittadini(request):
         queryset = CittadinoTable.objects.all()
 
     return render(request, 'Cittadini.html', {'queryset': queryset})
+
+def linkCittadinoFiltrato(request, paziente):
+    queryset = CittadinoTable.objects.filter(codFiscale__icontains=paziente)
+    return render(request, 'Cittadini.html', {'queryset': queryset})
+
+def linkOspedaleFiltrato(request, codiceOspedale):
+    queryset = OspedaleTable.objects.filter(codiceStruttura__icontains=codiceOspedale)
+    return render(request, 'Ospedali.html', {'queryset': queryset})
