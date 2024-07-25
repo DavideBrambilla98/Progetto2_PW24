@@ -10,8 +10,6 @@
     <option value="1">Paziente</option>
     <option value="2">CSSN</option>
     <option value="3">Nome ospedale</option>
-    <option value="4">Patologia</option>
-    <option value="5">Data</option>
 {% endblock search_option %}
 
 {% block content %}
@@ -20,6 +18,7 @@
             <thead>
                 <tr>
                     <th>Paziente</th>
+                    <th>CSSN</th>
                     <th>Ospedale</th>
                     <th>Ricovero</th>
                     <th>Motivo</th>
@@ -29,8 +28,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for object in object_list %}
+                {% for object in queryset %}
                 <tr>
+                    <td>{{ object.paziente.nome }} {{ object.paziente.cognome }}</td>
                     <td>{{ object.paziente }}</td>
                     <td>{{ object.codiceOspedale }}</td>
                     <td>{{ object.codiceRicovero }}</td>

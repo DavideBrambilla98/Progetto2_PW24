@@ -9,7 +9,7 @@
 {% block search_option %}
     <option value="1">Cittadino</option>
     <option value="2">CSSN</option>
-    <option value="3">Data di nascita</option>
+    <!-- <option value="3">Data di nascita</option> -->
     <option value="4">Luogo di nascita</option>
     <option value="5">Indirizzo</option>
 {% endblock search_option %}
@@ -27,14 +27,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for object in object_list %}
+                {% for object in queryset %}
                 <tr>
                     <td>{{ object.cognome }} {{ object.nome }}</td>
                     <td>{{ object.codFiscale }} </td>
                     <td>{{ object.dataNascita }} </td>
                     <td>{{ object.nasLuogo }}</td>
                     <td>{{ object.indirizzo }} </td>
-
                 </tr>
                 {% empty %}
                 <tr>
