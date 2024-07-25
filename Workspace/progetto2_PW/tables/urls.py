@@ -18,4 +18,8 @@ urlpatterns = [
     path('ospedale/', searchOspedali, name='listaOsp'),
     path('', searchRicoveri, name='listaRic'),
     path('cittadino/', searchCittadini, name='listaPers'),
+
+    path('create/', table_views.RicoveroTableCreate.as_view(), name='RicCreate'),
+    path('update/<int:pk>/', table_views.RicoveroTableUpdate.as_view(), name='RicUpdate'),
+    path('delete/<int:pk>/', table_views.RicoveroTableDelete.as_view(), name='RicDelete'),
 ]
