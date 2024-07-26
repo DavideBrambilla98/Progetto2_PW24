@@ -1,10 +1,7 @@
-
-
-
 <head>
-    
     <title>Form Ricovero</title>
 </head>
+
 <body>
     <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
     <form method="post">
@@ -20,4 +17,3 @@
     </form>
     <a href="{% url 'listaRic' %}">Annulla</a>
 </body>
-
