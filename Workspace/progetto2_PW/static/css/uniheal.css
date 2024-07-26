@@ -84,8 +84,14 @@ header {
 
 /* Stile della tabella*/
 /*=================================================================================================*/
+.table-container {
+    max-height: 55vh;  /* Imposta l'altezza massima desiderata */
+    overflow-y: auto;   /* Aggiungi la scrollbar verticale se necessario */
+    margin-bottom: 2%;
+}
 .table-hover-highlight tbody tr:hover {
-    background-color: rgba(253, 209, 141, 0.63);  /* Cambia il colore di sfondo se necessario */
+    background-color: rgba(253, 209, 141, 0.53);  /* Cambia il colore di sfondo se necessario */
+    border: none!important;
 }
 .table {
     clear: both;
@@ -93,8 +99,14 @@ header {
     margin-left: auto;
     margin-right: auto;
 }
-.table th{
-    background-color: #FFB347;
+.thead-sticky th {
+    position: sticky;
+    top: 0;
+    background-color: #f6cc90;
+    font-size: 16px;
+}
+.table td{
+    font-size: 14px;
 }
 .table a {
     transition: all 0.5s;
@@ -102,8 +114,8 @@ header {
 }
 .table a:hover{
     color: #ff004f;
-    font-size: 1.01rem; /* ingrandisce il testo del link se ci si passa sopra */
 }
+
 
 /*stile del footer*/
 /*================================================================================================*/
@@ -116,6 +128,8 @@ footer {
     font-size: 24px;
     color: #fff;
     height: fit-content;
+    position: absolute;
+    bottom: 0;
 }
 
 .copSection i {

@@ -17,38 +17,40 @@
 
 {% block content %}
     <div class="container-fluid">
-        <table class="table table-striped table-hover-highlight">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Criticità</th>
-                    <th>Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for object in queryset  %}
-                <tr>
-                    <td>{{ object.nome }}</td>
-                    <td>{{ object.criticita }}</td>
-                    {% if object.cronica == "1" and object.mortale != "1" %}
-                        <td>Cronica</td>
-                    {% endif %}
-                    {% if object.cronica == "1" and object.mortale == "1" %}
-                        <td>Cronica e mortale</td>
-                    {% endif %}
-                    {% if object.cronica != "1" and object.mortale == "1" %}
-                        <td>Mortale</td>
-                    {% endif %}
-                    {% if object.cronica != "1" and object.mortale != "1" %}
-                        <td>Non cronica e non mortale</td>
-                    {% endif %}
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">Nessun record trovato</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table table-striped table-hover-highlight">
+                <thead class="thead-sticky">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Criticità</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in queryset  %}
+                    <tr>
+                        <td>{{ object.nome }}</td>
+                        <td>{{ object.criticita }}</td>
+                        {% if object.cronica == "1" and object.mortale != "1" %}
+                            <td>Cronica</td>
+                        {% endif %}
+                        {% if object.cronica == "1" and object.mortale == "1" %}
+                            <td>Cronica e mortale</td>
+                        {% endif %}
+                        {% if object.cronica != "1" and object.mortale == "1" %}
+                            <td>Mortale</td>
+                        {% endif %}
+                        {% if object.cronica != "1" and object.mortale != "1" %}
+                            <td>Non cronica e non mortale</td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">Nessun record trovato</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock content %}
