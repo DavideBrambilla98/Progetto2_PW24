@@ -35,6 +35,12 @@ switch (true) {
         pulsanteOspedale.style.color = "#a3a2a2";
         pulsanteVirus.style.color = "#0047AB";
         break;
+    case pagina.includes("disclaimer"):
+        pulsanteHome.style.color = "#a3a2a2";
+        pulsantePersona.style.color = "#a3a2a2";
+        pulsanteOspedale.style.color = "#a3a2a2";
+        pulsanteVirus.style.color = "#a3a2a2";
+        break;
     default:
         pulsanteHome.style.color = "#0047AB";
         pulsantePersona.style.color = "#a3a2a2";

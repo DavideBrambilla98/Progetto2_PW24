@@ -96,3 +96,6 @@ def searchCittadini(request):
         queryset = CittadinoTable.objects.all().order_by('nome')
 
     return render(request, 'Cittadini.html', {'queryset': queryset})
+
+def disclaimer(request):
+    return render(request, 'disclaimer.html')

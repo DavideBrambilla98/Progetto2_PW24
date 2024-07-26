@@ -116,6 +116,43 @@ header {
     color: #ff004f;
 }
 
+/*stile pagina disclaimer*/
+/*================================================================================================*/
+#cont {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 60vh;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#dis {
+    text-align: start;
+}
+
+#dis h1 {
+    font-size: 30px;
+    color: #ff004f;
+}
+
+#dis h2 {
+    font-size: 26px;
+}
+
+#dis h3 {
+    font-size: 22px;
+}
+
+#dis h4 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.avv {
+    color: #ff004f;
+    font-weight: bolder;
+}
 
 /*stile del footer*/
 /*================================================================================================*/
@@ -182,5 +219,3 @@ footer {
     color: #ff004f;
     transform: translateY(-5px);
 }
-
-/*prova bjdbnfijaSJVNSDHABDFVBDSJH*/
