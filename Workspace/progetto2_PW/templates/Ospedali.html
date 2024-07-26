@@ -14,29 +14,35 @@
 
 {% block content %}
     <div class="container-fluid">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Indirizzo</th>
-                    <th>Comune</th>
-                    <th>Direttore Sanitario</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for object in queryset %}
-                <tr>
-                    <td>{{ object.denominazioneStruttura }}</td>
-                    <td>{{ object.indirizzo }}</td>
-                    <td>{{ object.comune }}</td>
-                    <td>{{ object.direttoreSanitario }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">Nessun record trovato</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table class="table table-striped table-hover-highlight">
+                <thead class="thead-sticky">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Indirizzo</th>
+                        <th>Comune</th>
+                        <th>Direttore Sanitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in queryset %}
+                    <tr>
+                        <td>{{ object.denominazioneStruttura }}</td>
+                        <td>{{ object.indirizzo }}</td>
+                        <td>{{ object.comune }}</td>
+                        <td>
+                            <a href="{% url 'listaPers' %}?inlineFormCustomSelect={{ 2 }}&cerca={{  object.direttoreSanitario }}">
+                                {{ object.direttoreSanitario.nome }} {{ object.direttoreSanitario.cognome }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">Nessun record trovato</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock content %}

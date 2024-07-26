@@ -1,6 +1,5 @@
 header {
     display: flex;
-    align-items: left;
     justify-content: left;
     width: 100%;
     background-position: center;
@@ -16,6 +15,9 @@ header {
 
 .nameNav:hover {
     color: #ff004f;
+}
+.nav-item{
+    font-size: 18px;
 }
 
 /* Stile della barra di ricerca*/
@@ -83,11 +85,74 @@ header {
 
 /* Stile della tabella*/
 /*=================================================================================================*/
+.table-container {
+    max-height: 55vh;  /* Imposta l'altezza massima desiderata */
+    overflow-y: auto;   /* Aggiungi la scrollbar verticale se necessario */
+    margin-bottom: 2%;
+}
+.table-hover-highlight tbody tr:hover {
+    background-color: rgba(253, 209, 141, 0.53);  /* Cambia il colore di sfondo se necessario */
+    border: none!important;
+}
 .table {
     clear: both;
     width: 98%;
     margin-left: auto;
     margin-right: auto;
+}
+.thead-sticky th {
+    position: sticky;
+    top: 0;
+    background-color: #f6cc90;
+    font-size: 16px;
+}
+.table td{
+    font-size: 14px;
+}
+.table a {
+    transition: all 0.5s;
+    text-decoration: none;
+}
+.table a:hover{
+    color: #ff004f;
+}
+
+/*stile pagina disclaimer*/
+/*================================================================================================*/
+#cont {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 60vh;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#dis {
+    text-align: start;
+}
+
+#dis h1 {
+    font-size: 30px;
+    color: #ff004f;
+}
+
+#dis h2 {
+    font-size: 26px;
+}
+
+#dis h3 {
+    font-size: 22px;
+}
+
+#dis h4 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.avv {
+    color: #ff004f;
+    font-weight: bolder;
 }
 
 /*stile del footer*/
@@ -101,6 +166,8 @@ footer {
     font-size: 24px;
     color: #fff;
     height: fit-content;
+    position: absolute;
+    bottom: 0;
 }
 
 .copSection i {
@@ -153,5 +220,3 @@ footer {
     color: #ff004f;
     transform: translateY(-5px);
 }
-
-/*prova bjdbnfijaSJVNSDHABDFVBDSJH*/
