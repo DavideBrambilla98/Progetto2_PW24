@@ -51,19 +51,6 @@ class RicoveroTable(models.Model):
     motivo = models.CharField(max_length=50)
     costo = models.IntegerField()
 
-    def __str__(self):
-        return self.codiceRicovero  # serve per nominare le tabelle nel DB
-
-    def save(self, *args, **kwargs):
-        if not self.codiceRicovero and self.pk is None:
-            self.codiceRicovero = self.generaCodiceRicovero()
-        super().save(*args, **kwargs)
-    def generaCodiceRicovero(self):
-        prefix = "RIC-"
-        part1 = ''.join(random.choices(string.digits, k=3))
-        part2 = ''.join(random.choices(string.ascii_letters + string.digits, k=4))
-        part3 = ''.join(random.choices(string.digits, k=5))
-        return f'{prefix}{part1}{part2}{part3}'
 class PatologiaRicoveroTable(models.Model):
     codOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
     codRicovero = models.ForeignKey(RicoveroTable, on_delete=models.CASCADE)
