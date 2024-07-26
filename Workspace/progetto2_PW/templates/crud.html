@@ -9,10 +9,12 @@
     <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
-     <div>
-      <label for="{{ form.codiceRicovero.id_for_label }}">Codice Ricovero:</label>
-      {{ form.codiceRicovero }} 
-    </div>
+     {% if object and object.codiceRicovero %}
+            <div>
+                <label>Codice Ricovero:</label>
+                <span>{{ object.codiceRicovero }}</span>
+            </div>
+        {% endif %}
         {{ form.as_p }}
         <button type="submit">{% if object %}Salva Modifiche{% else %}Crea{% endif %}</button>
     </form>

@@ -1,27 +1,12 @@
+import random
+import string
+
 from django import forms
 
 from .models import RicoveroTable, PatologiaTable, CittadinoTable, OspedaleTable
 
 
 class RicoveroTableForm(forms.ModelForm):
-
-    codPatologia = forms.ModelChoiceField(queryset=PatologiaTable.objects.all(), required=False)
-
-    codFiscale = forms.ModelChoiceField(
-        queryset= CittadinoTable.objects.all(),
-        required=True,
-        empty_label='Seleziona paziente',
-        to_field_name='codFiscale',
-        widget=forms.Select
-    )
-
-    codiceStruttura = forms.ModelChoiceField(
-        queryset=OspedaleTable.objects.all(),
-        required=True,
-        empty_label='Seleziona Ospedale',
-        to_field_name='codiceStruttura',
-        widget=forms.Select
-    )
 
     codice = forms.ModelChoiceField(
         queryset=PatologiaTable.objects.all(),
@@ -33,3 +18,12 @@ class RicoveroTableForm(forms.ModelForm):
     class Meta:
         model = RicoveroTable
         fields = '__all__'
+        widgets = {
+            'codiceRicovero': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'data': forms.DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),
+            'durata': forms.NumberInput(attrs={'placeholder': 'Durata in giorni'}),
+            'motivo': forms.TextInput(attrs={'placeholder': 'Motivo del ricovero'}),
+            'costo': forms.NumberInput(attrs={'placeholder': 'Costo del ricovero'}),
+
+        }
+

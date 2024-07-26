@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q, F, Value
 from django.db.models.functions import Concat
 from .models import PatologiaTable, RicoveroTable, OspedaleTable, CittadinoTable, PatologiaRicoveroTable
@@ -106,6 +106,22 @@ class RicoveroTableCreate(CreateView):
                 codOspedale = self.object
             )
         return response
+    def createUpdate(request, pk=None):
+        if pk:
+            object = get_object_or_404(RicoveroTable, pk=pk)
+        else:
+            object=None
+
+        if request.method == 'POST':
+            form = RicoveroTableForm(request.POST, instance=object)
+            if form.is_valid():
+                form.save()
+                return redirect('listaRic')
+        else:
+            form = RicoveroTableForm(instance=object)
+
+        return render(request, 'crud.html', {'form': form, 'object': object})
+
 class RicoveroTableUpdate(UpdateView):
     model = RicoveroTable
     form_class = RicoveroTableForm
