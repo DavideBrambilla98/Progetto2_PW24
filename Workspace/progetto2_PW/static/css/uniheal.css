@@ -12,11 +12,12 @@ header {
 
 /* Stile della navigazione*/
 /*=================================================================================================*/
-.nameNav{
-    transition: all 0.5s;
-}
+
 .nameNav:hover {
     color: #ff004f;
+}
+.nav-item{
+    font-size: 18px;
 }
 
 /* Stile della barra di ricerca*/
