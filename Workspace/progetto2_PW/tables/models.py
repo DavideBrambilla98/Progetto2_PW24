@@ -52,9 +52,12 @@ class RicoveroTable(models.Model):
     motivo = models.CharField(max_length=50)
     costo = models.IntegerField()
 
+<<<<<<< HEAD
     def __str__(self):
         return self.codiceRicovero  # serve per nominare le tabelle nel DB
 
+=======
+>>>>>>> CRUD_Davide
 class PatologiaRicoveroTable(models.Model):
     codOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
     codRicovero = models.ForeignKey(RicoveroTable, on_delete=models.CASCADE)
