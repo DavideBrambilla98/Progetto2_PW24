@@ -106,21 +106,6 @@ class RicoveroTableCreate(CreateView):
                 codOspedale = self.object
             )
         return response
-    def createUpdate(request, pk=None):
-        if pk:
-            object = get_object_or_404(RicoveroTable, pk=pk)
-        else:
-            object=None
-
-        if request.method == 'POST':
-            form = RicoveroTableForm(request.POST, instance=object)
-            if form.is_valid():
-                form.save()
-                return redirect('listaRic')
-        else:
-            form = RicoveroTableForm(instance=object)
-
-        return render(request, 'crud.html', {'form': form, 'object': object})
 
 class RicoveroTableUpdate(UpdateView):
     model = RicoveroTable
