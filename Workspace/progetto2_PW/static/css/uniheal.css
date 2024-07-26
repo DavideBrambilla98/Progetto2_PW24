@@ -1,6 +1,5 @@
 header {
     display: flex;
-    align-items: left;
     justify-content: left;
     width: 100%;
     background-position: center;
@@ -13,7 +12,9 @@ header {
 
 /* Stile della navigazione*/
 /*=================================================================================================*/
-
+.nameNav{
+    transition: all 0.5s;
+}
 .nameNav:hover {
     color: #ff004f;
 }
@@ -83,11 +84,25 @@ header {
 
 /* Stile della tabella*/
 /*=================================================================================================*/
+.table-hover-highlight tbody tr:hover {
+    background-color: rgba(253, 209, 141, 0.63);  /* Cambia il colore di sfondo se necessario */
+}
 .table {
     clear: both;
     width: 98%;
     margin-left: auto;
     margin-right: auto;
+}
+.table th{
+    background-color: #FFB347;
+}
+.table a {
+    transition: all 0.5s;
+    text-decoration: none;
+}
+.table a:hover{
+    color: #ff004f;
+    font-size: 1.01rem; /* ingrandisce il testo del link se ci si passa sopra */
 }
 
 /*stile del footer*/
