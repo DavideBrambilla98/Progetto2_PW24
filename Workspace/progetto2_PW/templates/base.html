@@ -41,32 +41,33 @@
                 </ul>
             </div>
         </nav>
-        
-        <div class="container-fluid">
-          <div >
-            <div class="research-row">
-              <form method="GET">
-                {% csrf_token %}
-                <div class="form-row align-items-center">
-                  <div class="col-auto my-1">
-                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="inlineFormCustomSelect">
-                      {% block search_option %}
-
-                      {% endblock search_option %}
-                    </select>
-                  </div>
-                  <div class="search_bar">
-                    <input id="cerca" name="cerca" type="text" placeholder="cerca" />
-                  </div>
-                  <div class="col-auto my-1">
-                    <button type="submit" class="btn btn-primary"><i id="pulsRicerca" class="fa-solid fa-magnifying-glass"></i></button>
-                  </div>
+        {% block nav %}
+            <div class="container-fluid">
+              <div >
+                <div class="research-row">
+                  <form method="GET">
+                    {% csrf_token %}
+                    <div class="form-row align-items-center">
+                      <div class="col-auto my-1">
+                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="inlineFormCustomSelect">
+                          {% block search_option %}
+    
+                          {% endblock search_option %}
+                        </select>
+                      </div>
+                      <div class="search_bar">
+                        <input id="cerca" name="cerca" type="text" placeholder="cerca" />
+                      </div>
+                      <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-primary"><i id="pulsRicerca" class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
-          </div>
-        </div>
+        {% endblock nav %}
         
         {% block content %}
             
@@ -81,7 +82,7 @@
             <div class="copSection">Copyright <i class="fa-regular fa-copyright"></i>
             </div>
             <div class="disclaimer">Disclaimer 
-                <a href="Disclaimer.php"><i class="fa-solid fa-receipt"></i></a>
+                <a href="{% url 'disclaimer' %}"><i class="fa-solid fa-receipt"></i></a>
             </div>
         </footer>
     
@@ -89,6 +90,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="{% static 'js/gestioneAzioni.js' %}"></script> 
+        <script src="{% static 'js/gestioneAzioni.js' %}"></script>
     </body>
 </html>

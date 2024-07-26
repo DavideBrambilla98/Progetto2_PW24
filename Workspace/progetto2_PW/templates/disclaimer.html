@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Discalimer
+    {% endblock head_title %}
+</title>
+
+{% block nav %}
+    
+{% endblock nav %}
+
+{% block content %}
+    <cont id="cont">
+        <disclaimer id="dis">
+            <h1>
+                Disclaimer
+            </h1>
+            <h2>
+                Avvertenze di rischio per gli utenti e i visitatori del Sito
+            </h2>
+            <h4>
+                Il presente disclaimer si applica ai contenuti e servizi di questo sito <br>
+            </h4>
+
+            <h4>
+                <div class="avv"> ATTENZIONE:</div> Le informazioni contenute nel Sito non hanno nessuno scopo informativo, possono essere modificate o rimosse in qualsiasi momento, e comunque in nessun caso possono costituire la formulazione di una diagnosi o la prescrizione di un trattamento.<br>
+                Le informazioni contenute nel Sito non intendono e non devono in alcun modo sostituire il rapporto diretto medico-paziente o la visita specialistica.<br>
+                I dati mostrati nelle tabelle sono stati generati casualmente al solo scopo di riempimento della base di dati.<br>
+                Il Sito non si assume alcuna responsabilità in merito al cattivo uso che gli utenti potrebbero fare delle indicazioni riportate nel Sito stesso.<br>
+            </h4>
+            <h2>
+                Note:<br>
+            </h2>
+            <h4>
+                Il Sito è stato realizzato come progetto per il corso di "Programmazione Web" per dimostrare le capacità e competenze apprese durante l'anno accademico.<br>
+            </h4>
+        </disclaimer>
+    </cont>
+    
+{% endblock content %}

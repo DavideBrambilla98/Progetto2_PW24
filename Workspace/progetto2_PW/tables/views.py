@@ -14,19 +14,19 @@ def searchPatologie(request):
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = PatologiaTable.objects.filter(nome__icontains=search_value)
+            queryset = PatologiaTable.objects.filter(nome__icontains=search_value).order_by('nome')
         elif search_option == '2':
-            queryset = PatologiaTable.objects.filter(criticita__icontains=search_value)
+            queryset = PatologiaTable.objects.filter(criticita__icontains=search_value).order_by('nome')
         elif search_option == '3':
-            queryset = PatologiaTable.objects.filter(Q(cronica='1') & ~Q(mortale='1'))
+            queryset = PatologiaTable.objects.filter(Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
         elif search_option == '4':
-            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & Q(mortale='1'))
+            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & Q(mortale='1')).order_by('nome')
         elif search_option == '5':
-            queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1'))
+            queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1')).order_by('nome')
         elif search_option == '6':
-            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1'))
+            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
     else:
-        queryset = PatologiaTable.objects.all()
+        queryset = PatologiaTable.objects.all().order_by('nome')
 
     return render(request, 'Patologie.html', {'queryset': queryset})
 
@@ -36,13 +36,15 @@ def searchOspedali(request):
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = OspedaleTable.objects.filter(denominazioneStruttura__icontains=search_value)
+            queryset = OspedaleTable.objects.filter(denominazioneStruttura__icontains=search_value).order_by('denominazioneStruttura')
         elif search_option == '2':
-            queryset = OspedaleTable.objects.filter(comune__icontains=search_value)
+            queryset = OspedaleTable.objects.filter(comune__icontains=search_value).order_by('denominazioneStruttura')
         elif search_option == '3':
-            queryset = OspedaleTable.objects.filter(direttoreSanitario__icontains=search_value)
+            queryset = OspedaleTable.objects.filter(direttoreSanitario__icontains=search_value).order_by('denominazioneStruttura')
+        elif search_option == '4':
+            queryset = OspedaleTable.objects.filter(codiceStruttura__icontains=search_value).order_by('denominazioneStruttura')
     else:
-        queryset = OspedaleTable.objects.all()
+        queryset = OspedaleTable.objects.all().order_by('denominazioneStruttura')
 
     return render(request, 'Ospedali.html', {'queryset': queryset})
 
@@ -52,7 +54,6 @@ def searchRicoveri(request):
 
     if search_option and search_value:
         if search_option == '1':
-            # Annotate con il campo concatenato
             queryset = RicoveroTable.objects.annotate(
                 paziente_full_name=Concat(
                     'paziente__nome',
@@ -63,11 +64,11 @@ def searchRicoveri(request):
                 paziente_full_name__icontains=search_value
             )
         elif search_option == '2':
-            queryset = RicoveroTable.objects.filter(paziente__codFiscale__icontains=search_value)
+            queryset = RicoveroTable.objects.filter(paziente__codFiscale__icontains=search_value).order_by('paziente__nome')
         elif search_option == '3':
-            queryset = RicoveroTable.objects.filter(codiceOspedale__denominazioneStruttura__icontains=search_value)
+            queryset = RicoveroTable.objects.filter(codiceOspedale__denominazioneStruttura__icontains=search_value).order_by('paziente__nome')
     else:
-        queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all() #paziente è il nome del campo foreignkey diRicoveroTable
+        queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all().order_by('paziente__nome') #paziente è il nome del campo foreignkey diRicoveroTable
 
     return render(request, 'Ricoveri.html', {'queryset': queryset})
 
@@ -77,19 +78,28 @@ def searchCittadini(request):
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = CittadinoTable.objects.filter(cognome__icontains=search_value)
+            queryset = CittadinoTable.objects.annotate(
+                paziente_full_name=Concat(
+                    'nome',
+                    Value(' '),  # Aggiungi uno spazio tra nome e cognome
+                    'cognome'
+                )
+            ).filter(
+                paziente_full_name__icontains=search_value
+            )
         elif search_option == '2':
-            queryset = CittadinoTable.objects.filter(codFiscale__icontains=search_value)
+            queryset = CittadinoTable.objects.filter(codFiscale__icontains=search_value).order_by('nome')
         elif search_option == '3':
-            queryset = CittadinoTable.objects.filter(dataNascita__icontains=search_value)
+            queryset = CittadinoTable.objects.filter(dataNascita__icontains=search_value).order_by('nome')
         elif search_option == '4':
-            queryset = CittadinoTable.objects.filter(nasLuogo__icontains=search_value)
+            queryset = CittadinoTable.objects.filter(nasLuogo__icontains=search_value).order_by('nome')
         elif search_option == '5':
-            queryset = CittadinoTable.objects.filter(indirizzo__icontains=search_value)
+            queryset = CittadinoTable.objects.filter(indirizzo__icontains=search_value).order_by('nome')
     else:
-        queryset = CittadinoTable.objects.all()
+        queryset = CittadinoTable.objects.all().order_by('nome')
 
     return render(request, 'Cittadini.html', {'queryset': queryset})
+
 class RicoveroTableCreate(CreateView):
     model = RicoveroTable
     form_class = RicoveroTableForm
@@ -139,3 +149,8 @@ class RicoveroTableDelete(DeleteView):
     model = RicoveroTable
     template_name = 'crud_delete.html'
     success_url = reverse_lazy('listaRic')
+
+
+def disclaimer(request):
+    return render(request, 'disclaimer.html')
+

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views as table_views
+from . import views as table_views, views
 from django.views.generic import ListView,DetailView
 
 from .models import PatologiaTable, OspedaleTable, CittadinoTable
@@ -13,13 +13,14 @@ from .models import CittadinoTable
 # lista delle tabelle | home page
 # tabelle singole
 urlpatterns = [
-  
+
+    path('', searchRicoveri, name='listaRic'),
     path('patologia/', searchPatologie, name='listaPat'),
     path('ospedale/', searchOspedali, name='listaOsp'),
-    path('', searchRicoveri, name='listaRic'),
     path('cittadino/', searchCittadini, name='listaPers'),
-
     path('create/', table_views.RicoveroTableCreate.as_view(), name='RicCreate'),
     path('update/<int:pk>/', table_views.RicoveroTableUpdate.as_view(), name='RicUpdate'),
     path('delete/<int:pk>/', table_views.RicoveroTableDelete.as_view(), name='RicDelete'),
+    path('disclaimer/', views.disclaimer, name='disclaimer'),
+    
 ]
