@@ -38,6 +38,8 @@ def searchOspedali(request):
             queryset = OspedaleTable.objects.filter(comune__icontains=search_value)
         elif search_option == '3':
             queryset = OspedaleTable.objects.filter(direttoreSanitario__icontains=search_value)
+        elif search_option == '4':
+            queryset = OspedaleTable.objects.filter(codiceStruttura__icontains=search_value)
     else:
         queryset = OspedaleTable.objects.all()
 
@@ -49,7 +51,6 @@ def searchRicoveri(request):
 
     if search_option and search_value:
         if search_option == '1':
-            # Annotate con il campo concatenato
             queryset = RicoveroTable.objects.annotate(
                 paziente_full_name=Concat(
                     'paziente__nome',
@@ -68,13 +69,21 @@ def searchRicoveri(request):
 
     return render(request, 'Ricoveri.html', {'queryset': queryset})
 
-def searchCittadini(request, paziente):
+def searchCittadini(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = CittadinoTable.objects.filter(cognome__icontains=search_value)
+            queryset = CittadinoTable.objects.annotate(
+                paziente_full_name=Concat(
+                    'nome',
+                    Value(' '),  # Aggiungi uno spazio tra nome e cognome
+                    'cognome'
+                )
+            ).filter(
+                paziente_full_name__icontains=search_value
+            )
         elif search_option == '2':
             queryset = CittadinoTable.objects.filter(codFiscale__icontains=search_value)
         elif search_option == '3':
@@ -87,11 +96,3 @@ def searchCittadini(request, paziente):
         queryset = CittadinoTable.objects.all()
 
     return render(request, 'Cittadini.html', {'queryset': queryset})
-
-def linkCittadinoFiltrato(request, paziente):
-    queryset = CittadinoTable.objects.filter(codFiscale__icontains=paziente)
-    return render(request, 'Cittadini.html', {'queryset': queryset})
-
-def linkOspedaleFiltrato(request, codiceOspedale):
-    queryset = OspedaleTable.objects.filter(codiceStruttura__icontains=codiceOspedale)
-    return render(request, 'Ospedali.html', {'queryset': queryset})
