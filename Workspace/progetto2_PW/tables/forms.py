@@ -1,13 +1,15 @@
-import random
-import string
-
 from django import forms
 
 from .models import RicoveroTable, PatologiaTable, CittadinoTable, OspedaleTable
 
 
 class RicoveroTableForm(forms.ModelForm):
-
+    paziente = forms.ModelChoiceField(
+        queryset=CittadinoTable.objects.all(),
+        required=True,
+        empty_label="Seleziona paziente",
+        widget=forms.Select
+    )
     codice = forms.ModelChoiceField(
         queryset=PatologiaTable.objects.all(),
         required=True,
@@ -27,3 +29,6 @@ class RicoveroTableForm(forms.ModelForm):
 
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['paziente'].label_from_instance = lambda obj: f"{obj.nome} {obj.cognome}"
