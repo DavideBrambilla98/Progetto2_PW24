@@ -22,6 +22,7 @@
                         <th>Indirizzo</th>
                         <th>Comune</th>
                         <th>Direttore Sanitario</th>
+                        <th>Ricoveri</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,11 @@
                         <td>
                             <a href="{% url 'listaPers' %}?inlineFormCustomSelect={{ 2 }}&cerca={{  object.direttoreSanitario }}">
                                 {{ object.direttoreSanitario.nome }} {{ object.direttoreSanitario.cognome }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'listaRic' %}?inlineFormCustomSelect={{ 3 }}&cerca={{  object.denominazioneStruttura}}">
+                                {{ "object.paziente "}}
                             </a>
                         </td>
                     </tr>
