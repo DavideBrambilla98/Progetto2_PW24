@@ -153,9 +153,12 @@ footer {
     color: #ff004f;
     transform: translateY(-5px);
 }
-
+.puls-crud{
+    display: flex;
+}
 .btn-orange {
-     border: none;
+
+    border: none;
     border-radius: 10px; /* Angoli arrotondati */
     margin-left: 15px;
     color: #fff;
