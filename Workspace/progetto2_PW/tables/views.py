@@ -106,7 +106,6 @@ class RicoveroTableCreate(CreateView):
     template_name = 'crud.html'
     success_url = reverse_lazy('listaRic')
 
-
 class RicoveroTableUpdate(UpdateView):
     model = RicoveroTable
     form_class = RicoveroTableForm

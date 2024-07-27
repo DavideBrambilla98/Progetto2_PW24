@@ -6,8 +6,6 @@
     <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
-     {% if object and object.codiceRicovero %}
-        {% endif %}
         {{ form.as_p }}
         <button type="submit">{% if object %}Salva Modifiche{% else %}Crea{% endif %}</button>
     </form>
