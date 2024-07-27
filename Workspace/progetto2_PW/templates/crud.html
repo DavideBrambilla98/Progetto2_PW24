@@ -1,13 +1,20 @@
+{% extends "base.html" %}
+
 <head>
     <title>Form Ricovero</title>
 </head>
 
-<body>
-    <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">{% if object %}Salva Modifiche{% else %}Crea {% endif %}</button>
-    </form>
-    <a href="{% url 'listaRic' %}">Annulla</a>
-</body>
+{% block nav %}
+    
+{% endblock nav %}
+{% block content %}
+    <body>
+        <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% if object %}Salva Modifiche{% else %}Crea {% endif %}</button>
+        </form>
+        <a href="{% url 'listaRic' %}">Annulla</a>
+    </body>
+{% endblock content %}

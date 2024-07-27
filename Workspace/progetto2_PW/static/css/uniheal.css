@@ -220,3 +220,55 @@ footer {
     color: #ff004f;
     transform: translateY(-5px);
 }
+
+/*stile del delete*/
+/*================================================================================================*/
+.delete-content{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.delete-content h1{
+    font-size: 40px;
+    color: #ff004f;
+}
+.delete-content p {
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+}
+.delete-content button{
+    text-decoration: none;
+    border: none;
+    background-color: #FFB347;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+}
+.delete-content button i{
+        color: white;
+}
+button:hover,
+.delete-buttons a:hover {
+    background-color: #ff004f;
+    color: white;
+}
+.delete-buttons{
+    margin-top: 2%;
+    font-size: 24px;
+    color: white;
+}
+
+.delete-buttons a {
+    text-decoration: none;
+    border: none;
+    background-color: #FFB347;
+    border-radius: 5px;
+    color: white;
+    margin-left: 2%;
+    height: 40px;
+    padding: 4px;
+}
+
+.delete-buttons{
+    display: flex;
+}
