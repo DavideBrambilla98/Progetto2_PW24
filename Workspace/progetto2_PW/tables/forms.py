@@ -39,7 +39,18 @@ class RicoveroTableForm(forms.ModelForm):
         }
 
 
-# metodo che permette di generare in automatico il codice del rcovero controllando che non esista già nel BD
+
+    def clean_durata(self):
+        durata = self.cleaned_data.get('durata')
+        if durata is not None and durata < 0:
+            raise forms.ValidationError('La durata non può essere negativa.')
+        return durata
+
+    def clean_costo(self):
+        costo = self.cleaned_data.get('costo')
+        if costo is not None and costo < 0:
+            raise forms.ValidationError('Il costo non può essere negativo.')
+        return costo
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['paziente'].label_from_instance = lambda obj: f"{obj.nome} {obj.cognome}"
