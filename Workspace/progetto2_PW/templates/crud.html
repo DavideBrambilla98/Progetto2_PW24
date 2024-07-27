@@ -7,10 +7,6 @@
     <form method="post">
         {% csrf_token %}
      {% if object and object.codiceRicovero %}
-            <div>
-                <label>Codice Ricovero:</label>
-                <span>{{ object.codiceRicovero }}</span>
-            </div>
         {% endif %}
         {{ form.as_p }}
         <button type="submit">{% if object %}Salva Modifiche{% else %}Crea{% endif %}</button>
