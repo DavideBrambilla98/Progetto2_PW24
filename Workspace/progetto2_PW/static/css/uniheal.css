@@ -287,6 +287,7 @@ button:hover,
     transition: all 0.5s;
     margin-left: 1%;
     margin-bottom: 1%;
+    text-align: center;
 }
 .btn-secondary {
     border: none;
@@ -299,6 +300,7 @@ button:hover,
     padding: 6px 12px; /* Padding ridotto */
     cursor: pointer;
     transition: all 0.5s;
+    text-align: center;
 }
 .puls-crud{
     display: flex;

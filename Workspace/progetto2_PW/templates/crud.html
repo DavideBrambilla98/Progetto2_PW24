@@ -12,9 +12,10 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">{% if object %}Salva Modifiche{% else %}Crea {% endif %}</button>
+            <div class="d-flex justify-content-start mt-3">
+                    <button type="submit" class="btn btn-orange mr-2">{% if object %}Salva Modifiche{% else %}Crea Nuovo Ricovero{% endif %}</button>
+                    <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla</a>
+            </div>
         </form>
-        <a href="{% url 'listaRic' %}">Annulla</a>
     </body>
 {% endblock content %}
-
