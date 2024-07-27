@@ -1,7 +1,11 @@
-from django.shortcuts import render
-from django.db.models import Q, F, Value, Count
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q, F, Value
 from django.db.models.functions import Concat
-from .models import PatologiaTable, RicoveroTable, OspedaleTable, CittadinoTable
+from .models import PatologiaTable, RicoveroTable, OspedaleTable, CittadinoTable, PatologiaRicoveroTable
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from tables.forms import RicoveroTableForm
 
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -121,5 +125,24 @@ def searchCittadini(request):
 
     return render(request, 'Cittadini.html', {'queryset': cittadini_con_ricoveri})
 
+class RicoveroTableCreate(CreateView):
+    model = RicoveroTable
+    form_class = RicoveroTableForm
+    template_name = 'crud.html'
+    success_url = reverse_lazy('listaRic')
+
+class RicoveroTableUpdate(UpdateView):
+    model = RicoveroTable
+    form_class = RicoveroTableForm
+    template_name = 'crud.html'
+    success_url = reverse_lazy('listaRic')
+
+class RicoveroTableDelete(DeleteView):
+    model = RicoveroTable
+    template_name = 'crud_delete.html'
+    success_url = reverse_lazy('listaRic')
+
+
 def disclaimer(request):
     return render(request, 'disclaimer.html')
+

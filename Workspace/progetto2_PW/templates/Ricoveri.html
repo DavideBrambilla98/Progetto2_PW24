@@ -12,6 +12,14 @@
     <option value="3">Nome ospedale</option>
 {% endblock search_option %}
 
+{% block puls-create %}
+    <div class="btn-create-container">
+        <a href="{% url 'RicCreate' %}">
+        <button type="button" class="btn btn-orange">Aggiungi ricovero <i class="fa fa-plus"></i></button>
+        </a>
+    </div>
+{% endblock puls-create %}
+
 {% block content %}
     <div class="container-fluid">
         <div class="table-container">
@@ -26,6 +34,7 @@
                         <th>Durata</th>
                         <th>Costo</th>
                         <th>Patologia</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +60,15 @@
                                 {{object.numero_patologie}}
                             </a>
                         </td>
+                          <!-- Pulsante "Update" -->
+                            <a href="{% url 'RicUpdate' object.pk %}">
+                                <button class= "btn-orange" type="button"><i class="fa-solid fa-pen"></i></button>
+                            </a>
+                          <!-- Pulsante "Delete" -->
+                            <a href="{% url 'RicDelete' object.pk %}">
+                                <button class= "btn-orange" type="button"><i class="fa-solid fa-trash"></i></button>
+                            </a>
+                        </td>  
                     </tr>
                     {% empty %}
                     <tr>

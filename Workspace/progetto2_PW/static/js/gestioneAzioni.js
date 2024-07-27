@@ -41,6 +41,24 @@ switch (true) {
         pulsanteOspedale.style.color = "#a3a2a2";
         pulsanteVirus.style.color = "#a3a2a2";
         break;
+    case pagina.includes("create"):
+        pulsanteHome.style.color = "#a3a2a2";
+        pulsantePersona.style.color = "#a3a2a2";
+        pulsanteOspedale.style.color = "#a3a2a2";
+        pulsanteVirus.style.color = "#a3a2a2";
+        break;
+    case pagina.includes("update"):
+        pulsanteHome.style.color = "#a3a2a2";
+        pulsantePersona.style.color = "#a3a2a2";
+        pulsanteOspedale.style.color = "#a3a2a2";
+        pulsanteVirus.style.color = "#a3a2a2";
+        break;
+    case pagina.includes("delete"):
+        pulsanteHome.style.color = "#a3a2a2";
+        pulsantePersona.style.color = "#a3a2a2";
+        pulsanteOspedale.style.color = "#a3a2a2";
+        pulsanteVirus.style.color = "#a3a2a2";
+        break;
     default:
         pulsanteHome.style.color = "#0047AB";
         pulsantePersona.style.color = "#a3a2a2";
