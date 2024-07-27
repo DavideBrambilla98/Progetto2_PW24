@@ -22,7 +22,6 @@ header {
 
 /* Stile della barra di ricerca*/
 /*=================================================================================================*/
-
 .form-row {
     clear: both;
     background: #FFB347;
@@ -86,7 +85,7 @@ header {
 /* Stile della tabella*/
 /*=================================================================================================*/
 .table-container {
-    max-height: 55vh;  /* Imposta l'altezza massima desiderata */
+    max-height: 50vh;  /* Imposta l'altezza massima desiderata */
     overflow-y: auto;   /* Aggiungi la scrollbar verticale se necessario */
     margin-bottom: 2%;
 }
@@ -219,4 +218,90 @@ footer {
 .disclaimer a:hover {
     color: #ff004f;
     transform: translateY(-5px);
+}
+.puls-crud{
+    display: flex;
+}
+
+/*stile del delete*/
+/*================================================================================================*/
+.delete-content{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.delete-content h1{
+    font-size: 40px;
+    color: #ff004f;
+}
+.delete-content p {
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+}
+.delete-content button{
+    text-decoration: none;
+    border: none;
+    background-color: #FFB347;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+}
+.delete-content button i{
+        color: white;
+}
+button:hover,
+.delete-buttons a:hover {
+    background-color: #ff004f;
+    color: white;
+}
+.delete-buttons{
+    margin-top: 2%;
+    font-size: 24px;
+    color: white;
+}
+.delete-buttons a {
+    text-decoration: none;
+    border: none;
+    background-color: #c0c1c3;
+    border-radius: 5px;
+    color: white;
+    margin-left: 2%;
+    height: 40px;
+    padding: 4px;
+}
+.delete-buttons{
+    display: flex;
+}
+
+/*stile dei pulsanti del crud*/
+/*================================================================================================*/
+.btn-orange {
+    border: none;
+    border-radius: 10px; /* Angoli arrotondati */
+    color: #fff;
+    background-color: #FFB347; /* Colore arancione */
+    box-shadow: none;
+    font-size: 14px; /* Riduce ulteriormente la dimensione del testo */
+    padding: 6px 12px; /* Riduce ulteriormente il padding per una dimensione complessiva più piccola */
+    cursor: pointer;
+    transition: all 0.5s;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    text-align: center;
+}
+.btn-secondary {
+    border: none;
+    border-radius: 10px; /* Angoli arrotondati */
+    margin: 0; /* Rimuove il margine laterale */
+    color: #fff;
+    background-color: #6c757d; /* Colore grigio */
+    box-shadow: none;
+    font-size: 14px; /* Dimensione del testo */
+    padding: 6px 12px; /* Padding ridotto */
+    cursor: pointer;
+    transition: all 0.5s;
+    text-align: center;
+}
+.puls-crud{
+    display: flex;
 }

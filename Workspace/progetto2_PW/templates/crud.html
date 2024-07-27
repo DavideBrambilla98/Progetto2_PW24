@@ -1,19 +1,21 @@
+{% extends "base.html" %}
 <head>
     <title>Form Ricovero</title>
 </head>
 
-<body>
-    <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
-    <form method="post">
-        {% csrf_token %}
-     {% if object and object.codiceRicovero %}
-            <div>
-                <label>Codice Ricovero:</label>
-                <span>{{ object.codiceRicovero }}</span>
+{% block nav %}
+    
+{% endblock nav %}
+{% block content %}
+    <body>
+        <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-start mt-3">
+                    <button type="submit" class="btn btn-orange mr-2">{% if object %}Salva Modifiche{% else %}Crea Nuovo Ricovero{% endif %}</button>
+                    <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla</a>
             </div>
-        {% endif %}
-        {{ form.as_p }}
-        <button type="submit">{% if object %}Salva Modifiche{% else %}Crea{% endif %}</button>
-    </form>
-    <a href="{% url 'listaRic' %}">Annulla</a>
-</body>
+        </form>
+    </body>
+{% endblock content %}

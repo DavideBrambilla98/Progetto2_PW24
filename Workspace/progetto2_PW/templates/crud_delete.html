@@ -1,14 +1,25 @@
-
+{% extends "base.html" %}
 
 <head>
     <title>Conferma Eliminazione Ricovero</title>
 </head>
-<body>
-    <h1>Conferma Eliminazione Ricovero</h1>
-    <p>Sei sicuro di voler eliminare il ricovero "{{ object }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Conferma</button>
-    </form>
-    <a href="{% url 'listaRic' %}">Annulla</a>
-</body>
+
+{% block nav %}
+    
+{% endblock nav %}
+
+{% block content %}
+    <body>
+        <div class = "delete-content">
+            <h1>Conferma eliminazione ricovero:</h1>
+            <p>Sei sicuro di voler eliminare il ricovero del paziente: {{ object.paziente.nome }} {{ object.paziente.cognome }}?</p>
+                <div class = "delete-buttons">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit">Elimina <i class='fa-solid fa-trash'></i> </button>
+                    </form>
+                    <a href="{% url 'listaRic' %}">Annulla <i class="fa-solid fa-xmark"></i> </a>
+                </div>
+        </div>
+    </body>
+{% endblock content %}
