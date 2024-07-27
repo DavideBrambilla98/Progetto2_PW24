@@ -45,7 +45,7 @@
                             <td>Non cronica e non mortale</td>
                         {% endif %}
                         <td><a href="{% url 'listaRic' %}?inlineFormCustomSelect={{ 4 }}&cerca={{  object.codice}}">
-                                {{object.numero_ricoveri}}
+                                trovati: {{object.numero_ricoveri}}
                         </a></td>
                     </tr>
                     {% empty %}

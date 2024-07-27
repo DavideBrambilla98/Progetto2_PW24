@@ -38,7 +38,7 @@
                         <td>{{ object.indirizzo }} </td>
                         <td>
                             <a href="{% url 'listaRic' %}?inlineFormCustomSelect={{ 2 }}&cerca={{  object.codFiscale}}">
-                                {{ object.numero_ricoveri}}
+                                trovati: {{ object.numero_ricoveri}}
                             </a>
                         </td>
                     </tr>

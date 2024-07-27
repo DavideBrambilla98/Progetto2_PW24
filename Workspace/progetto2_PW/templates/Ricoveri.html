@@ -35,6 +35,7 @@
                         <th>Costo</th>
                         <th>Patologia</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,13 +58,16 @@
                         <td>{{ object.costo }} €</td>
                         <td>
                             <a href="{% url 'listaPat' %}?inlineFormCustomSelect={{ 7 }}&cerca={{  object.codiceRicovero}}">
-                                {{object.numero_patologie}}
+                                trovate: {{object.numero_patologie}}
                             </a>
                         </td>
+                        <td>
                           <!-- Pulsante "Update" -->
                             <a href="{% url 'RicUpdate' object.pk %}">
                                 <button class= "btn-orange" type="button"><i class="fa-solid fa-pen"></i></button>
                             </a>
+                        </td>  
+                        <td>
                           <!-- Pulsante "Delete" -->
                             <a href="{% url 'RicDelete' object.pk %}">
                                 <button class= "btn-orange" type="button"><i class="fa-solid fa-trash"></i></button>
