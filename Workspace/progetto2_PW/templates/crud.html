@@ -7,7 +7,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">{% if object %}Salva Modifiche{% else %}Crea{% endif %}</button>
+        <button type="submit">{% if object %}Salva Modifiche{% else %}Crea {% endif %}</button>
     </form>
     <a href="{% url 'listaRic' %}">Annulla</a>
 </body>
