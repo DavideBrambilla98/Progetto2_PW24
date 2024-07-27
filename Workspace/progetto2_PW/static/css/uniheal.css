@@ -220,6 +220,10 @@ footer {
     color: #ff004f;
     transform: translateY(-5px);
 }
+.puls-crud{
+    display: flex;
+}
+.btn-orange {
 
 /*stile del delete*/
 /*================================================================================================*/
@@ -270,4 +274,18 @@ button:hover,
 }
 .delete-buttons{
     display: flex;
+    border: none;
+    border-radius: 10px; /* Angoli arrotondati */
+    margin-left: 15px;
+    color: #fff;
+    background-color: #FFB347; /* Colore arancione */
+    box-shadow: none;
+    font-size: 14px; /* Riduce ulteriormente la dimensione del testo */
+    padding: 6px 12px; /* Riduce ulteriormente il padding per una dimensione complessiva più piccola */
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.btn-orange:hover {
+    color: #4A9DEC;
 }
