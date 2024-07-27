@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db.models import Q, F, Value
+from django.db.models import Q, F, Value, Count
 from django.db.models.functions import Concat
 from .models import PatologiaTable, RicoveroTable, OspedaleTable, CittadinoTable
 
@@ -43,7 +43,12 @@ def searchOspedali(request):
     else:
         queryset = OspedaleTable.objects.all().order_by('denominazioneStruttura')
 
-    return render(request, 'Ospedali.html', {'queryset': queryset})
+    # Annotare ogni ospedale con il numero di ricoveri
+    ospedali_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('ricoverotable')
+    ).order_by('denominazioneStruttura')
+
+    return render(request, 'Ospedali.html', {'queryset': ospedali_con_ricoveri})
 
 def searchRicoveri(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -96,6 +101,11 @@ def searchCittadini(request):
         queryset = CittadinoTable.objects.all().order_by('nome')
 
     return render(request, 'Cittadini.html', {'queryset': queryset})
+
+
+
+    # Passa gli ospedali al template
+    return render(request, 'Ospedali.html', {'queryset': ospedali})
 
 def disclaimer(request):
     return render(request, 'disclaimer.html')
