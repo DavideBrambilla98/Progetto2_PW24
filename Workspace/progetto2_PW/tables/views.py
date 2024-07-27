@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q, F, Value
 from django.db.models.functions import Concat
@@ -25,10 +26,18 @@ def searchPatologie(request):
             queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1')).order_by('nome')
         elif search_option == '6':
             queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
+        elif search_option == '7':
+            queryset = PatologiaTable.objects.filter(
+                patologiaricoverotable__codRicovero__codiceRicovero=search_value).order_by('nome')
     else:
         queryset = PatologiaTable.objects.all().order_by('nome')
 
-    return render(request, 'Patologie.html', {'queryset': queryset})
+    patologie_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('patologiaricoverotable')
+    ).order_by('nome')
+
+    return render(request, 'Patologie.html', {'queryset': patologie_con_ricoveri})
+   # return render(request, 'Patologie.html', {'queryset': queryset})
 
 def searchOspedali(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -46,7 +55,12 @@ def searchOspedali(request):
     else:
         queryset = OspedaleTable.objects.all().order_by('denominazioneStruttura')
 
-    return render(request, 'Ospedali.html', {'queryset': queryset})
+    # Annotare ogni ospedale con il numero di ricoveri
+    ospedali_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('ricoverotable')
+    ).order_by('denominazioneStruttura')
+
+    return render(request, 'Ospedali.html', {'queryset': ospedali_con_ricoveri})
 
 def searchRicoveri(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -67,10 +81,16 @@ def searchRicoveri(request):
             queryset = RicoveroTable.objects.filter(paziente__codFiscale__icontains=search_value).order_by('paziente__nome')
         elif search_option == '3':
             queryset = RicoveroTable.objects.filter(codiceOspedale__denominazioneStruttura__icontains=search_value).order_by('paziente__nome')
+        elif search_option == '4':
+            queryset = RicoveroTable.objects.filter(patologiaricoverotable__codPatologia__codice=search_value).order_by('paziente__nome')
     else:
         queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all().order_by('paziente__nome') #paziente è il nome del campo foreignkey diRicoveroTable
 
-    return render(request, 'Ricoveri.html', {'queryset': queryset})
+    ricoveri_con_patologie = queryset.annotate(
+    numero_patologie=Count('patologiaricoverotable')
+    ).order_by('paziente__nome')
+
+    return render(request, 'Ricoveri.html', {'queryset': ricoveri_con_patologie})
 
 def searchCittadini(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -98,7 +118,12 @@ def searchCittadini(request):
     else:
         queryset = CittadinoTable.objects.all().order_by('nome')
 
-    return render(request, 'Cittadini.html', {'queryset': queryset})
+    # Annotare ogni cittadino con il numero di ricoveri
+    cittadini_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('ricoverotable')
+        ).order_by('nome')
+
+    return render(request, 'Cittadini.html', {'queryset': cittadini_con_ricoveri})
 
 class RicoveroTableCreate(CreateView):
     model = RicoveroTable

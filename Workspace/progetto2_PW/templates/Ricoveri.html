@@ -33,6 +33,7 @@
                         <th>Data</th>
                         <th>Durata</th>
                         <th>Costo</th>
+                        <th>Patologia</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -55,6 +56,10 @@
                         <td>{{ object.durata }} gg</td>
                         <td>{{ object.costo }} €</td>
                         <td>
+                            <a href="{% url 'listaPat' %}?inlineFormCustomSelect={{ 7 }}&cerca={{  object.codiceRicovero}}">
+                                {{object.numero_patologie}}
+                            </a>
+                        </td>
                           <!-- Pulsante "Update" -->
                             <a href="{% url 'RicUpdate' object.pk %}">
                                 <button class= "btn-orange" type="button"><i class="fa-solid fa-pen"></i></button>

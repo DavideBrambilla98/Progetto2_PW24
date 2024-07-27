@@ -25,6 +25,7 @@
                         <th>Data Nascita</th>
                         <th>Luogo Nascita</th>
                         <th>Indirizzo</th>
+                        <th>Ricoveri</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,11 @@
                         <td>{{ object.dataNascita }} </td>
                         <td>{{ object.nasLuogo }}</td>
                         <td>{{ object.indirizzo }} </td>
+                        <td>
+                            <a href="{% url 'listaRic' %}?inlineFormCustomSelect={{ 2 }}&cerca={{  object.codFiscale}}">
+                                {{ object.numero_ricoveri}}
+                            </a>
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>

@@ -24,6 +24,7 @@
                         <th>Nome</th>
                         <th>Criticità</th>
                         <th>Tipo</th>
+                        <th>Ricovero</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,9 @@
                         {% if object.cronica != "1" and object.mortale != "1" %}
                             <td>Non cronica e non mortale</td>
                         {% endif %}
+                        <td><a href="{% url 'listaRic' %}?inlineFormCustomSelect={{ 4 }}&cerca={{  object.codice}}">
+                                {{object.numero_ricoveri}}
+                        </a></td>
                     </tr>
                     {% empty %}
                     <tr>
