@@ -38,17 +38,12 @@ class RicoveroTableForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['paziente'].label_from_instance = lambda obj: f"{obj.nome} {obj.cognome}"
         if self.instance and not self.instance.pk:
-            self.initial['data'] = timezone.now().strftime('%d/%m/%Y')
-        if self.instance and not self.instance.pk:
             unique_codiceRicovero = False
             while not unique_codiceRicovero:
                 new_codiceRicovero = 'RIC-' + uuid.uuid4().hex[:12]
                 if not RicoveroTable.objects.filter(codiceRicovero=new_codiceRicovero).exists():
                     unique_codiceRicovero = True
             self.initial['codiceRicovero'] = new_codiceRicovero
-    def clean(self):
-        data = self.cleaned_data['data']
-        return data.strftime('%d/%m/%Y')
 
     def save(self, commit=True):
         instance = super().save(commit=False)
