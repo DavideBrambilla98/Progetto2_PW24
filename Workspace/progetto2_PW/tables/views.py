@@ -22,10 +22,17 @@ def searchPatologie(request):
             queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1')).order_by('nome')
         elif search_option == '6':
             queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
+        if search_option == '7':
+            queryset = PatologiaTable.objects.filter(codice__icontains=search_value).order_by('nome')
     else:
         queryset = PatologiaTable.objects.all().order_by('nome')
 
-    return render(request, 'Patologie.html', {'queryset': queryset})
+    patologie_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('patologiaricoverotable')
+    ).order_by('nome')
+
+    return render(request, 'Patologie.html', {'queryset': patologie_con_ricoveri})
+   # return render(request, 'Patologie.html', {'queryset': queryset})
 
 def searchOspedali(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
@@ -69,6 +76,8 @@ def searchRicoveri(request):
             queryset = RicoveroTable.objects.filter(paziente__codFiscale__icontains=search_value).order_by('paziente__nome')
         elif search_option == '3':
             queryset = RicoveroTable.objects.filter(codiceOspedale__denominazioneStruttura__icontains=search_value).order_by('paziente__nome')
+        elif search_option == '4':
+            queryset = RicoveroTable.objects.filter(patologiaricoverotable__codPatologia__codice=search_value).order_by('paziente__nome')
     else:
         queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all().order_by('paziente__nome') #paziente è il nome del campo foreignkey diRicoveroTable
 
