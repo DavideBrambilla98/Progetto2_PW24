@@ -1,7 +1,8 @@
 import random
 import string
-
 from django.db import models
+
+
 
 # Create your models here.
 class PatologiaTable(models.Model):
@@ -50,6 +51,11 @@ class RicoveroTable(models.Model):
     durata = models.IntegerField()
     motivo = models.CharField(max_length=50)
     costo = models.IntegerField()
+
+
+    def __str__(self):
+        return self.codiceRicovero  # serve per nominare le tabelle nel DB
+
 
 class PatologiaRicoveroTable(models.Model):
     codOspedale = models.ForeignKey(OspedaleTable, on_delete=models.CASCADE)
