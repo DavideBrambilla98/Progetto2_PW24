@@ -32,6 +32,7 @@ class RicoveroTableForm(forms.ModelForm):
         fields = ['codiceRicovero', 'codiceOspedale','paziente', 'codice', 'data', 'durata', 'motivo', 'costo']
 
         widgets = {
+            'codiceRicovero': forms.TextInput(attrs={'readonly': 'readonly'}),
             'data': forms.DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),
             'durata': forms.NumberInput(attrs={'placeholder': 'Durata in giorni'}),
             'motivo': forms.TextInput(attrs={'placeholder': 'Motivo del ricovero'}),
