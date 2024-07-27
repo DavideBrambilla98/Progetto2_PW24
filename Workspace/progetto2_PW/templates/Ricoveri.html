@@ -25,6 +25,7 @@
                         <th>Data</th>
                         <th>Durata</th>
                         <th>Costo</th>
+                        <th>Patologia</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,11 @@
                         <td>{{ object.data }}</td>
                         <td>{{ object.durata }} gg</td>
                         <td>{{ object.costo }} €</td>
+                        <td>
+                            <a href="{% url 'listaPat' %}?inlineFormCustomSelect={{ 7 }}&cerca={{  object.codiceRicovero}}">
+                                {{object.numero_patologie}}
+                            </a>
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>

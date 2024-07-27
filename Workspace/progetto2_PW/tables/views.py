@@ -22,8 +22,9 @@ def searchPatologie(request):
             queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1')).order_by('nome')
         elif search_option == '6':
             queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
-        if search_option == '7':
-            queryset = PatologiaTable.objects.filter(codice__icontains=search_value).order_by('nome')
+        elif search_option == '7':
+            queryset = PatologiaTable.objects.filter(
+                patologiaricoverotable__codRicovero__codiceRicovero=search_value).order_by('nome')
     else:
         queryset = PatologiaTable.objects.all().order_by('nome')
 
@@ -81,7 +82,11 @@ def searchRicoveri(request):
     else:
         queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all().order_by('paziente__nome') #paziente è il nome del campo foreignkey diRicoveroTable
 
-    return render(request, 'Ricoveri.html', {'queryset': queryset})
+    ricoveri_con_patologie = queryset.annotate(
+    numero_patologie=Count('patologiaricoverotable')
+    ).order_by('paziente__nome')
+
+    return render(request, 'Ricoveri.html', {'queryset': ricoveri_con_patologie})
 
 def searchCittadini(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
