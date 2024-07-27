@@ -51,7 +51,7 @@
 
     {% block nav %}
     <div class="container-fluid">
-        <div>
+        <div class ="res-cont">
             <div class="research-row">
                 <form method="GET">
                     {% csrf_token %}
@@ -73,6 +73,9 @@
                         </div>
                     </div>
                 </form>
+            {% block puls-create %}
+                
+            {% endblock puls-create %}
             </div>
         </div>
     </div>

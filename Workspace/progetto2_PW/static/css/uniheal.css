@@ -22,7 +22,6 @@ header {
 
 /* Stile della barra di ricerca*/
 /*=================================================================================================*/
-
 .form-row {
     clear: both;
     background: #FFB347;
@@ -86,7 +85,7 @@ header {
 /* Stile della tabella*/
 /*=================================================================================================*/
 .table-container {
-    max-height: 55vh;  /* Imposta l'altezza massima desiderata */
+    max-height: 50vh;  /* Imposta l'altezza massima desiderata */
     overflow-y: auto;   /* Aggiungi la scrollbar verticale se necessario */
     margin-bottom: 2%;
 }
@@ -263,7 +262,7 @@ button:hover,
 .delete-buttons a {
     text-decoration: none;
     border: none;
-    background-color: #FFB347;
+    background-color: #c0c1c3;
     border-radius: 5px;
     color: white;
     margin-left: 2%;
@@ -277,10 +276,8 @@ button:hover,
 /*stile dei pulsanti del crud*/
 /*================================================================================================*/
 .btn-orange {
-
     border: none;
     border-radius: 10px; /* Angoli arrotondati */
-    margin-left: 15px;
     color: #fff;
     background-color: #FFB347; /* Colore arancione */
     box-shadow: none;
@@ -288,6 +285,8 @@ button:hover,
     padding: 6px 12px; /* Riduce ulteriormente il padding per una dimensione complessiva più piccola */
     cursor: pointer;
     transition: all 0.5s;
+    margin-left: 1%;
+    margin-bottom: 1%;
 }
 .btn-secondary {
     border: none;
@@ -301,6 +300,6 @@ button:hover,
     cursor: pointer;
     transition: all 0.5s;
 }
-.btn-secondary:hover {
-    color: #4A9DEC;
+.puls-crud{
+    display: flex;
 }
