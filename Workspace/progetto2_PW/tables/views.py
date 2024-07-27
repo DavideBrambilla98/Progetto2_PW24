@@ -96,19 +96,11 @@ class RicoveroTableCreate(CreateView):
     template_name = 'crud.html'
     success_url = reverse_lazy('listaRic')
 
-
 class RicoveroTableUpdate(UpdateView):
     model = RicoveroTable
     form_class = RicoveroTableForm
     template_name = 'crud.html'
     success_url = reverse_lazy('listaRic')
-
-    def get_form(self, *args, **kwargs):
-        form = super().get_form(*args, **kwargs)
-        if 'codiceRicovero' in form.fields:
-            form.fields['codiceRicovero'].widget.attrs['readonly'] = True
-        return form
-
 
 class RicoveroTableDelete(DeleteView):
     model = RicoveroTable
