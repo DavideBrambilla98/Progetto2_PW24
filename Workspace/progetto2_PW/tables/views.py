@@ -96,16 +96,6 @@ class RicoveroTableCreate(CreateView):
     template_name = 'crud.html'
     success_url = reverse_lazy('listaRic')
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        codPatologia = form.cleaned_data.get('codPatologia')
-        if codPatologia:
-            PatologiaRicoveroTable.objects.create(
-                codRicovero = self.object,
-                codPatologia = codPatologia,
-                codOspedale = self.object
-            )
-        return response
 
 class RicoveroTableUpdate(UpdateView):
     model = RicoveroTable
@@ -118,17 +108,7 @@ class RicoveroTableUpdate(UpdateView):
         if 'codiceRicovero' in form.fields:
             form.fields['codiceRicovero'].widget.attrs['readonly'] = True
         return form
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        codPatologia = form.cleaned_data.get('codPatologia')
 
-        if codPatologia:
-            records = RicoveroTable.objects.filter(codiceRicovero=self.object)
-            for record in records:
-                record.codPatologia = codPatologia
-                record.codOspedale = self.object.codOspedale
-                record.save()
-        return response
 
 class RicoveroTableDelete(DeleteView):
     model = RicoveroTable

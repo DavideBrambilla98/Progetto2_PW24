@@ -62,4 +62,4 @@ class PatologiaRicoveroTable(models.Model):
     codRicovero = models.ForeignKey(RicoveroTable, on_delete=models.CASCADE)
     codPatologia = models.ForeignKey(PatologiaTable, on_delete=models.CASCADE)
     def __str__(self):
-        return self.codRicovero  # serve per nominare le tabelle nel DB
+        return str(self.codRicovero)  # serve per nominare le tabelle nel DB
