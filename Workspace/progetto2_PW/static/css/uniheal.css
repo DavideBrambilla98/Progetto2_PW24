@@ -225,7 +225,7 @@ footer {
 /*================================================================================================*/
 .delete-content{
     margin-top: 5%;
-    margin-left: 5%;
+    margin-left: 2%;
 }
 .delete-content h1{
     font-size: 40px;
@@ -268,7 +268,6 @@ button:hover,
     height: 40px;
     padding: 4px;
 }
-
 .delete-buttons{
     display: flex;
 }
