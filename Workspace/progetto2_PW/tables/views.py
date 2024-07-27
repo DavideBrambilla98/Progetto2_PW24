@@ -100,12 +100,12 @@ def searchCittadini(request):
     else:
         queryset = CittadinoTable.objects.all().order_by('nome')
 
-    return render(request, 'Cittadini.html', {'queryset': queryset})
+    # Annotare ogni cittadino con il numero di ricoveri
+    cittadini_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('ricoverotable')
+        ).order_by('nome')
 
-
-
-    # Passa gli ospedali al template
-    return render(request, 'Ospedali.html', {'queryset': ospedali})
+    return render(request, 'Cittadini.html', {'queryset': cittadini_con_ricoveri})
 
 def disclaimer(request):
     return render(request, 'disclaimer.html')
