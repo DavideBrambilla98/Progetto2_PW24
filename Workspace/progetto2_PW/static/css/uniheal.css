@@ -154,4 +154,20 @@ footer {
     transform: translateY(-5px);
 }
 
-/*prova bjdbnfijaSJVNSDHABDFVBDSJH*/
+.btn-orange {
+     border: none;
+    border-radius: 10px; /* Angoli arrotondati */
+    margin-left: 15px;
+    color: #fff;
+    background-color: #FFB347; /* Colore arancione */
+    box-shadow: none;
+    font-size: 14px; /* Riduce ulteriormente la dimensione del testo */
+    padding: 6px 12px; /* Riduce ulteriormente il padding per una dimensione complessiva più piccola */
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.btn-orange:hover {
+    color: #4A9DEC;
+
+}

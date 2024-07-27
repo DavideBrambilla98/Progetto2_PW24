@@ -14,7 +14,7 @@
 
 {% block content %}
      <a href="{% url 'RicCreate' %}">
-        <button type="button">Crea Nuovo Ricovero</button>
+        <button type="button" class="btn btn-orange"><i class="fa fa-plus"></i></button>
     </a>
     <div class="container-fluid">
         <table class="table">
@@ -42,15 +42,15 @@
                     <td>{{ object.durata }} gg</td>
                     <td>{{ object.costo }} €</td>
                      <td>
-                    <!-- Pulsante "Update" -->
-                    <a href="{% url 'RicUpdate' object.pk %}">
-                        <button type="button">Modifica</button>
-                    </a>
+                         <!-- Pulsante "Update" -->
+                         <a href="{% url 'RicUpdate' object.pk %}" class="btn btn-orange">
+                            <i class="fa fa-pencil-alt"></i>
+                        </a>
 
-                    <!-- Pulsante "Delete" -->
-                    <a href="{% url 'RicDelete' object.pk %}">
-                        <button type="button">Elimina</button>
-                    </a>
+                        <!-- Pulsante "Delete" -->
+                        <a href="{% url 'RicDelete' object.pk %}" class="btn btn-orange ">
+                            <i class="fa fa-trash"></i>
+                        </a>
                 </tr>
                 {% empty %}
                 <tr>

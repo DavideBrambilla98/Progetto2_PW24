@@ -1,13 +1,24 @@
-<head>
-    <title>Form Ricovero</title>
-</head>
+{% extends "base.html" %}
 
-<body>
-    <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">{% if object %}Salva Modifiche{% else %}Crea{% endif %}</button>
-    </form>
-    <a href="{% url 'listaRic' %}">Annulla</a>
-</body>
+<title>
+    {% block head_title %} 
+        {{ block.super }} | Form Ricovero 
+    {% endblock head_title %}
+</title>
+
+{% block nav %}
+    <!-- Blocco vuoto per rimuovere le opzioni di ricerca -->
+{% endblock nav %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-orange">{% if object %}Salva Modifiche{% else %}Crea nuovo ricovero{% endif %}</button>
+            <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla</a>
+        </form>
+    </div>
+{% endblock content %}
+
