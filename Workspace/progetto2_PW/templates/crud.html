@@ -8,13 +8,17 @@
 {% endblock nav %}
 {% block content %}
     <body>
-        <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
-        <form method="post">
+        <div class="title-crud">
+            <h1>{% if object %}Modifica ricovero{% else %}Crea nuovo ricovero{% endif %}</h1>
+        </div>
+        <form class="crud-form" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="d-flex justify-content-start mt-3">
-                    <button type="submit" class="btn btn-orange mr-2">{% if object %}Salva Modifiche{% else %}Crea Nuovo Ricovero{% endif %}</button>
-                    <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla</a>
+                <div class = "delete-buttons">
+                        <button type="submit" class="btn btn-orange mr-2">{% if object %}Modifica {% else %}Crea{% endif %}</button>
+                        <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla </a>
+                </div>
             </div>
         </form>
     </body>

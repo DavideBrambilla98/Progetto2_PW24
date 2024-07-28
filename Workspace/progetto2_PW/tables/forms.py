@@ -5,7 +5,7 @@ import uuid # usato per generare in automatico il codice del ricovero
 
 class RicoveroTableForm(forms.ModelForm):
     paziente = forms.ModelChoiceField(
-        queryset=CittadinoTable.objects.all(),
+        queryset=CittadinoTable.objects.all().order_by('nome'),
         required=True,
         empty_label="Seleziona paziente",
         widget=forms.Select
@@ -13,14 +13,14 @@ class RicoveroTableForm(forms.ModelForm):
     #permette di scegliere dalla lista di tutte le patologie
 
     codice = forms.ModelChoiceField(
-        queryset=PatologiaTable.objects.all(),
+        queryset=PatologiaTable.objects.all().order_by('nome'),
         required=True,
         empty_label= "Seleziona patologia",
         to_field_name='codice',
         widget=forms.Select
     )
     codiceOspedale = forms.ModelChoiceField(
-        queryset=OspedaleTable.objects.all(),
+        queryset=OspedaleTable.objects.all().order_by('denominazioneStruttura'),
         required=True,
         empty_label="Seleziona ospedale",
         widget=forms.Select
@@ -33,13 +33,11 @@ class RicoveroTableForm(forms.ModelForm):
 
         widgets = {
             'codiceRicovero': forms.TextInput(attrs={'readonly': 'readonly'}),
-            'data': forms.DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),
+            'data': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'durata': forms.NumberInput(attrs={'placeholder': 'Durata in giorni'}),
             'motivo': forms.TextInput(attrs={'placeholder': 'Motivo del ricovero'}),
             'costo': forms.NumberInput(attrs={'placeholder': 'Costo del ricovero'}),
         }
-
-
 
     def clean_durata(self):
         durata = self.cleaned_data.get('durata')
@@ -52,6 +50,7 @@ class RicoveroTableForm(forms.ModelForm):
         if costo is not None and costo < 0:
             raise forms.ValidationError('Il costo non può essere negativo.')
         return costo
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['paziente'].label_from_instance = lambda obj: f"{obj.nome} {obj.cognome}"
@@ -61,7 +60,8 @@ class RicoveroTableForm(forms.ModelForm):
                 # Trova il record corrispondente nel modello PatologiaRicoveroTable
                 patologia_ricovero = PatologiaRicoveroTable.objects.filter(
                     codRicovero=self.instance,
-                    codOspedale=self.instance.codiceOspedale
+                    codOspedale=self.instance.codiceOspedale,
+
                 ).first()
 
                 if patologia_ricovero:
@@ -70,6 +70,9 @@ class RicoveroTableForm(forms.ModelForm):
 
             except PatologiaRicoveroTable.DoesNotExist:
                 pass
+
+            # Imposta il valore iniziale del campo 'data' alla data dell'istanza
+            self.initial['data'] = self.instance.data
 
         else:
             if self.instance and not self.instance.pk:
@@ -93,6 +96,7 @@ class RicoveroTableForm(forms.ModelForm):
             PatologiaRicoveroTable.objects.update_or_create(
                 codRicovero=instance,
                 codOspedale=codOspedale,
+                codPatologia=codPatologia,
                 defaults={
                     'codPatologia': codPatologia,
                 }
