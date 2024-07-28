@@ -299,15 +299,6 @@ button:hover{
     background-color: #FFB347; /* Colore arancione */
     margin-left: 1%;
     margin-bottom: 1%;
-<<<<<<< Updated upstream
-}
-
-
-
-.puls-crud{
-=======
->>>>>>> Stashed changes
-    display: flex;
 }
 
 .btn-secondary {
@@ -319,7 +310,6 @@ button:hover{
     text-align: center;
     display: flex;
 }
-
 .btn-secondary i,
 .btn-orange i{
     padding-left: 5px ;
