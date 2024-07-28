@@ -5,7 +5,7 @@ import uuid # usato per generare in automatico il codice del ricovero
 
 class RicoveroTableForm(forms.ModelForm):
     paziente = forms.ModelChoiceField(
-        queryset=CittadinoTable.objects.all(),
+        queryset=CittadinoTable.objects.all().order_by('nome'),
         required=True,
         empty_label="Seleziona paziente",
         widget=forms.Select
@@ -13,14 +13,14 @@ class RicoveroTableForm(forms.ModelForm):
     #permette di scegliere dalla lista di tutte le patologie
 
     codice = forms.ModelChoiceField(
-        queryset=PatologiaTable.objects.all(),
+        queryset=PatologiaTable.objects.all().order_by('nome'),
         required=True,
         empty_label= "Seleziona patologia",
         to_field_name='codice',
         widget=forms.Select
     )
     codiceOspedale = forms.ModelChoiceField(
-        queryset=OspedaleTable.objects.all(),
+        queryset=OspedaleTable.objects.all().order_by('denominazioneStruttura'),
         required=True,
         empty_label="Seleziona ospedale",
         widget=forms.Select
