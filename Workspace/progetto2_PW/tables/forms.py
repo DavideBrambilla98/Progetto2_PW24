@@ -60,7 +60,8 @@ class RicoveroTableForm(forms.ModelForm):
                 # Trova il record corrispondente nel modello PatologiaRicoveroTable
                 patologia_ricovero = PatologiaRicoveroTable.objects.filter(
                     codRicovero=self.instance,
-                    codOspedale=self.instance.codiceOspedale
+                    codOspedale=self.instance.codiceOspedale,
+
                 ).first()
 
                 if patologia_ricovero:
@@ -95,6 +96,7 @@ class RicoveroTableForm(forms.ModelForm):
             PatologiaRicoveroTable.objects.update_or_create(
                 codRicovero=instance,
                 codOspedale=codOspedale,
+                codPatologia=codPatologia,
                 defaults={
                     'codPatologia': codPatologia,
                 }

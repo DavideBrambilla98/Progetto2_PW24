@@ -14,7 +14,7 @@
             {{ form.as_p }}
             <div class="d-flex justify-content-start mt-3">
                     <button type="submit" class="btn btn-orange mr-2">{% if object %}Salva Modifiche{% else %}Crea Nuovo Ricovero{% endif %}</button>
-                    <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla</a>
+                    <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla <i class="fa-solid fa-xmark"></i></a>
             </div>
         </form>
     </body>
