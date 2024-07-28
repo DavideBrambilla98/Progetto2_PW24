@@ -33,13 +33,11 @@ class RicoveroTableForm(forms.ModelForm):
 
         widgets = {
             'codiceRicovero': forms.TextInput(attrs={'readonly': 'readonly'}),
-            'data': forms.DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),
+            'data': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'durata': forms.NumberInput(attrs={'placeholder': 'Durata in giorni'}),
             'motivo': forms.TextInput(attrs={'placeholder': 'Motivo del ricovero'}),
             'costo': forms.NumberInput(attrs={'placeholder': 'Costo del ricovero'}),
         }
-
-
 
     def clean_durata(self):
         durata = self.cleaned_data.get('durata')
@@ -52,6 +50,7 @@ class RicoveroTableForm(forms.ModelForm):
         if costo is not None and costo < 0:
             raise forms.ValidationError('Il costo non può essere negativo.')
         return costo
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['paziente'].label_from_instance = lambda obj: f"{obj.nome} {obj.cognome}"
@@ -70,6 +69,9 @@ class RicoveroTableForm(forms.ModelForm):
 
             except PatologiaRicoveroTable.DoesNotExist:
                 pass
+
+            # Imposta il valore iniziale del campo 'data' alla data dell'istanza
+            self.initial['data'] = self.instance.data
 
         else:
             if self.instance and not self.instance.pk:
