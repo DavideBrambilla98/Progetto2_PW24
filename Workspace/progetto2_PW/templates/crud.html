@@ -16,8 +16,8 @@
             {{ form.as_p }}
             <div class="d-flex justify-content-start mt-3">
                 <div class = "delete-buttons">
-                        <button type="submit" class="btn btn-orange mr-2">{% if object %}Modifica <i class="fa-solid fa-pen"></i>{% else %}Crea <i class="fa fa-plus"></i>{% endif %}</button>
-                        <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla <i class="fa-solid fa-xmark"></i></a>
+                        <button type="submit" class="btn btn-orange mr-2">{% if object %}Modifica {% else %}Crea{% endif %}</button>
+                        <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla </a>
                 </div>
             </div>
         </form>
