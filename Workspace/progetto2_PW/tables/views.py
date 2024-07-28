@@ -54,7 +54,7 @@ def searchOspedali(request):
         elif search_option == '2':
             ospedali_con_ricoveri = ospedali_con_ricoveri.filter(comune__icontains=search_value)
         elif search_option == '3':
-            ospedali_con_ricoveri = ospedali_con_ricoveri.filter(direttoreSanitario__icontains=search_value)
+            ospedali_con_ricoveri = ospedali_con_ricoveri.filter(direttoreSanitario__nome__icontains=search_value)
         elif search_option == '4':
             ospedali_con_ricoveri = ospedali_con_ricoveri.filter(codiceStruttura__icontains=search_value)
 
