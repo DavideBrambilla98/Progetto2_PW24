@@ -12,7 +12,7 @@ class RicoveroTableForm(forms.ModelForm):
     )
     #permette di scegliere dalla lista di tutte le patologie
 
-    codice = forms.ModelChoiceField(
+    Patologia = forms.ModelChoiceField(
         queryset=PatologiaTable.objects.all().order_by('nome'),
         required=True,
         empty_label= "Seleziona patologia",
@@ -29,7 +29,7 @@ class RicoveroTableForm(forms.ModelForm):
 
     class Meta:
         model = RicoveroTable
-        fields = ['codiceRicovero', 'codiceOspedale','paziente', 'codice', 'data', 'durata', 'motivo', 'costo']
+        fields = ['codiceRicovero', 'codiceOspedale','paziente', 'Patologia', 'data', 'durata', 'motivo', 'costo']
 
         widgets = {
             'codiceRicovero': forms.TextInput(attrs={'readonly': 'readonly'}),

@@ -279,7 +279,7 @@ button:hover{
 /*stile dei pulsanti del crud*/
 /*================================================================================================*/
 
-.btn-orange, .btn-secondary {
+.btn-orange{
     border: none;
     justify-content: center;
     align-items: center;
@@ -300,41 +300,8 @@ button:hover{
     margin-bottom: 1%;
 }
 
-.btn-secondary {
-    color: #fff;
-    background-color: #6c757d; /* Colore grigio */
-    margin-left: 1%;
-    margin-bottom: 1%;
-    text-align: center;
-}
 
-/*.btn-orange {
-    border: none;
-    border-radius: 10px; /* Angoli arrotondati */
-  /*  color: #fff;
-    background-color: #FFB347; /* Colore arancione */
-  /*  box-shadow: none;
-    font-size: 14px; /* Riduce ulteriormente la dimensione del testo */
-  /*  padding: 6px 12px; /* Riduce ulteriormente il padding per una dimensione complessiva più piccola */
-  /*  cursor: pointer;
-    transition: all 0.5s;
-    margin-left: 1%;
-    margin-bottom: 1%;
-    text-align: center;
-}
-.btn-secondary {
-    border: none;
-    border-radius: 10px; /* Angoli arrotondati */
-  /*  margin: 0; /* Rimuove il margine laterale */
-  /*  color: #fff;
-    background-color: #6c757d; /* Colore grigio */
- /*   box-shadow: none;
-    font-size: 14px; /* Dimensione del testo */
-  /*  padding: 6px 12px; /* Padding ridotto */
-   /* cursor: pointer;
-    transition: all 0.5s;
-    text-align: center;
-}*/
+
 .puls-crud{
     display: flex;
 }
