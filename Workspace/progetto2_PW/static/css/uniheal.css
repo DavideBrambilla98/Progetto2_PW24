@@ -249,9 +249,12 @@ footer {
 .delete-content button i{
         color: white;
 }
-button:hover,
-.delete-buttons a:hover {
+button:hover{
     background-color: #ff004f;
+    color: white;
+}
+.delete-buttons a:hover {
+    background-color: #6c757d;
     color: white;
 }
 .delete-buttons{
