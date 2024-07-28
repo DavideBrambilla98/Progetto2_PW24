@@ -8,16 +8,18 @@
 {% endblock nav %}
 {% block content %}
     <body>
-        <h1>{% if object %}Modifica Ricovero{% else %}Crea Nuovo Ricovero{% endif %}</h1>
-        
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class=delete-buttons>
-                        <button type="submit">{% if object %}Salva Modifiche{% else %}Crea Nuovo Ricovero{% endif %}</button>
-                        <a href="{% url 'listaRic' %}">Annulla <i class="fa-solid fa-xmark"></i></a>
-                </div>           
-            </form>
-
+        <div class="title-crud">
+            <h1>{% if object %}Modifica ricovero{% else %}Crea nuovo ricovero{% endif %}</h1>
+        </div>
+        <form class="crud-form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-start mt-3">
+                <div class = "delete-buttons">
+                        <button type="submit" class="btn btn-orange mr-2">{% if object %}Modifica <i class="fa-solid fa-pen"></i>{% else %}Crea <i class="fa fa-plus"></i>{% endif %}</button>
+                        <a href="{% url 'listaRic' %}" class="btn btn-secondary">Annulla <i class="fa-solid fa-xmark"></i></a>
+                </div>
+            </div>
+        </form>
     </body>
 {% endblock content %}
