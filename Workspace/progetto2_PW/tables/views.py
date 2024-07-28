@@ -10,120 +10,119 @@ from tables.forms import RicoveroTableForm
 def searchPatologie(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
+
+    queryset = PatologiaTable.objects.all().order_by('nome')
+    patologie_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('patologiaricoverotable')
+    ).order_by('nome')
+
     if search_option == '3' or search_option == '4' or search_option == '5' or search_option == '6':
         search_value = '1'
 
     if search_option and search_value:
         if search_option == '1':
-            queryset = PatologiaTable.objects.filter(nome__icontains=search_value).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(nome__icontains=search_value)
         elif search_option == '2':
-            queryset = PatologiaTable.objects.filter(criticita__icontains=search_value).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(criticita__icontains=search_value)
         elif search_option == '3':
-            queryset = PatologiaTable.objects.filter(Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(Q(cronica='1') & ~Q(mortale='1'))
         elif search_option == '4':
-            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & Q(mortale='1')).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(~Q(cronica='1') & Q(mortale='1'))
         elif search_option == '5':
-            queryset = PatologiaTable.objects.filter(Q(cronica='1') & Q(mortale='1')).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(Q(cronica='1') & Q(mortale='1'))
         elif search_option == '6':
-            queryset = PatologiaTable.objects.filter(~Q(cronica='1') & ~Q(mortale='1')).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(~Q(cronica='1') & ~Q(mortale='1'))
         elif search_option == '7':
-            queryset = PatologiaTable.objects.filter(
-                patologiaricoverotable__codRicovero__codiceRicovero=search_value).order_by('nome')
-    else:
-        queryset = PatologiaTable.objects.all().order_by('nome')
-
-    patologie_con_ricoveri = queryset.annotate(
-        numero_ricoveri=Count('patologiaricoverotable')
-    ).order_by('nome')
+            patologie_con_ricoveri = patologie_con_ricoveri.filter(
+                patologiaricoverotable__codRicovero__codiceRicovero=search_value)
 
     return render(request, 'Patologie.html', {'queryset': patologie_con_ricoveri})
-   # return render(request, 'Patologie.html', {'queryset': queryset})
+
 
 def searchOspedali(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
 
-    if search_option and search_value:
-        if search_option == '1':
-            queryset = OspedaleTable.objects.filter(denominazioneStruttura__icontains=search_value).order_by('denominazioneStruttura')
-        elif search_option == '2':
-            queryset = OspedaleTable.objects.filter(comune__icontains=search_value).order_by('denominazioneStruttura')
-        elif search_option == '3':
-            queryset = OspedaleTable.objects.filter(direttoreSanitario__icontains=search_value).order_by('denominazioneStruttura')
-        elif search_option == '4':
-            queryset = OspedaleTable.objects.filter(codiceStruttura__icontains=search_value).order_by('denominazioneStruttura')
-    else:
-        queryset = OspedaleTable.objects.all().order_by('denominazioneStruttura')
-
-    # Annotare ogni ospedale con il numero di ricoveri
+    queryset = OspedaleTable.objects.all().order_by('denominazioneStruttura')
     ospedali_con_ricoveri = queryset.annotate(
         numero_ricoveri=Count('ricoverotable')
     ).order_by('denominazioneStruttura')
 
+    if search_option and search_value:
+        if search_option == '1':
+            ospedali_con_ricoveri = ospedali_con_ricoveri.filter(denominazioneStruttura__icontains=search_value)
+        elif search_option == '2':
+            ospedali_con_ricoveri = ospedali_con_ricoveri.filter(comune__icontains=search_value)
+        elif search_option == '3':
+            ospedali_con_ricoveri = ospedali_con_ricoveri.filter(direttoreSanitario__icontains=search_value)
+        elif search_option == '4':
+            ospedali_con_ricoveri = ospedali_con_ricoveri.filter(codiceStruttura__icontains=search_value)
+
     return render(request, 'Ospedali.html', {'queryset': ospedali_con_ricoveri})
+
 
 def searchRicoveri(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
 
+    queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all().order_by('paziente__nome')
+    ricoveri_con_patologie = queryset.annotate(
+        numero_patologie=Count('patologiaricoverotable')
+    ).order_by('paziente__nome')
+
     if search_option and search_value:
         if search_option == '1':
-            queryset = RicoveroTable.objects.annotate(
+            ricoveri_con_patologie = ricoveri_con_patologie.annotate(
                 paziente_full_name=Concat(
                     'paziente__nome',
-                    Value(' '),  # Aggiungi uno spazio tra nome e cognome
+                    Value(' '),  # Add a space between first name and last name
                     'paziente__cognome'
                 )
             ).filter(
                 paziente_full_name__icontains=search_value
             )
         elif search_option == '2':
-            queryset = RicoveroTable.objects.filter(paziente__codFiscale__icontains=search_value).order_by('paziente__nome')
+            ricoveri_con_patologie = ricoveri_con_patologie.filter(paziente__codFiscale__icontains=search_value)
         elif search_option == '3':
-            queryset = RicoveroTable.objects.filter(codiceOspedale__denominazioneStruttura__icontains=search_value).order_by('paziente__nome')
+            ricoveri_con_patologie = ricoveri_con_patologie.filter(codiceOspedale__denominazioneStruttura__icontains=search_value)
         elif search_option == '4':
-            queryset = RicoveroTable.objects.filter(patologiaricoverotable__codPatologia__codice=search_value).order_by('paziente__nome')
-    else:
-        queryset = RicoveroTable.objects.select_related('paziente','codiceOspedale').all().order_by('paziente__nome') #paziente è il nome del campo foreignkey diRicoveroTable
-
-    ricoveri_con_patologie = queryset.annotate(
-    numero_patologie=Count('patologiaricoverotable')
-    ).order_by('paziente__nome')
+            ricoveri_con_patologie = ricoveri_con_patologie.filter(patologiaricoverotable__codPatologia__codice=search_value)
 
     return render(request, 'Ricoveri.html', {'queryset': ricoveri_con_patologie})
+
 
 def searchCittadini(request):
     search_option = request.GET.get('inlineFormCustomSelect', '')
     search_value = request.GET.get('cerca', '')
 
+    # Esegui il conteggio prima di applicare il filtro
+    queryset = CittadinoTable.objects.all().order_by('nome')
+    cittadini_con_ricoveri = queryset.annotate(
+        numero_ricoveri=Count('ricoverotable')
+    ).order_by('nome')
+
     if search_option and search_value:
         if search_option == '1':
-            queryset = CittadinoTable.objects.annotate(
+            cittadini_con_ricoveri = cittadini_con_ricoveri.annotate(
                 paziente_full_name=Concat(
                     'nome',
-                    Value(' '),  # Aggiungi uno spazio tra nome e cognome
+                    Value(' '),  # Add a space between first name and last name
                     'cognome'
                 )
             ).filter(
                 paziente_full_name__icontains=search_value
             )
         elif search_option == '2':
-            queryset = CittadinoTable.objects.filter(codFiscale__icontains=search_value).order_by('nome')
+            cittadini_con_ricoveri = cittadini_con_ricoveri.filter(codFiscale__icontains=search_value)
         elif search_option == '3':
-            queryset = CittadinoTable.objects.filter(dataNascita__icontains=search_value).order_by('nome')
+            cittadini_con_ricoveri = cittadini_con_ricoveri.filter(dataNascita__icontains=search_value)
         elif search_option == '4':
-            queryset = CittadinoTable.objects.filter(nasLuogo__icontains=search_value).order_by('nome')
+            cittadini_con_ricoveri = cittadini_con_ricoveri.filter(nasLuogo__icontains=search_value)
         elif search_option == '5':
-            queryset = CittadinoTable.objects.filter(indirizzo__icontains=search_value).order_by('nome')
-    else:
-        queryset = CittadinoTable.objects.all().order_by('nome')
-
-    # Annotare ogni cittadino con il numero di ricoveri
-    cittadini_con_ricoveri = queryset.annotate(
-        numero_ricoveri=Count('ricoverotable')
-        ).order_by('nome')
+            cittadini_con_ricoveri = cittadini_con_ricoveri.filter(indirizzo__icontains=search_value)
 
     return render(request, 'Cittadini.html', {'queryset': cittadini_con_ricoveri})
+
 
 class RicoveroTableCreate(CreateView):
     model = RicoveroTable
