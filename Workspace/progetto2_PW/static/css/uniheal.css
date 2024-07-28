@@ -252,6 +252,7 @@ footer {
 button:hover{
     background-color: #ff004f;
     color: white;
+    text-decoration: none;
 }
 .delete-buttons a:hover {
     background-color: #6c757d;
@@ -281,7 +282,6 @@ button:hover{
 
 .btn-orange{
     border: none;
-    justify-content: center;
     align-items: center;
     border-radius: 10px; /* Angoli arrotondati */
     box-shadow: none;
@@ -294,14 +294,102 @@ button:hover{
 }
 
 .btn-orange {
+    text-decoration: none;
     color: #fff;
     background-color: #FFB347; /* Colore arancione */
     margin-left: 1%;
     margin-bottom: 1%;
+<<<<<<< Updated upstream
 }
 
 
 
 .puls-crud{
+=======
+>>>>>>> Stashed changes
     display: flex;
+}
+
+.btn-secondary {
+   text-decoration: none;
+    color: #fff;
+    background-color: #6c757d; /* Colore grigio */
+    margin-left: 1%;
+    margin-bottom: 1%;
+    text-align: center;
+    display: flex;
+}
+
+.btn-secondary i,
+.btn-orange i{
+    padding-left: 5px ;
+    padding-right: 5px ;
+}
+
+/*stile del form di create e update*/
+/*================================================================================================*/
+.title-crud{
+    margin-left: 2%;
+    margin-top: 1%;
+}
+.crud-form {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    width: 100%;
+    max-width: 600px;
+    max-height: 55vh;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    overflow: auto;
+}
+
+.crud-form p {
+    margin-bottom: 15px;
+}
+
+.crud-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.crud-form input,
+.crud-form textarea,
+.crud-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.crud-form button[type="submit"] {
+    background-color: #ff7f50;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.crud-form button[type="submit"]:hover {
+    background-color: #ff6347;
+}
+
+.crud-form .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.crud-form .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.crud-form .delete-buttons {
+    margin-top: 20px;
 }
